@@ -1,0 +1,30 @@
+/*
+@name: columns-two
+*/
+
+.block.columns-two {
+    @media screen and (min-width: map-get($map: $media-queries, $key: 'sm')) {
+        >.container {
+            @include flex(row, 0, wrap);
+            width: 100%;
+            align-items: var(--columns-two--align, flex-start);
+
+            >.block {
+                flex-grow: 0;
+                flex-shrink: 0;
+                flex: 50%;
+                // flex-basis: calc(100% / 2 - var(--columns-four--gap, 0) / 2);
+                max-width: calc(100% / 2 - var(--columns-two--gap, 0) / 2);
+
+                &:nth-child(odd) {
+                    padding-right: calc(var(--columns-two--gap)/2);
+                }
+
+                &:nth-child(even) {
+                    padding-left: calc(var(--columns-two--gap)/2);
+                }
+
+            }
+        }
+    }
+}

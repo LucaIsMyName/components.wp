@@ -1,0 +1,28 @@
+[data-tooltip] {
+    // --hsl-bright: 66%;
+    cursor: help;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 0.1em;
+    text-decoration-thickness: var(--px);
+    text-decoration-color: var(--color-background-dark);
+}
+
+[data-tooltip-content] {
+    --tooltip--font-size: var(--font-size-fluid-xs);
+    --tooltip--spacing: var(--spacing-em-sm);
+    --tooltip--border-radius: 0;
+    --tooltip--border: var(--px) solid var(--color-text);
+    --tooltip--color: var(--color-text);
+    --tooltip--background-color: var(--color-background);
+    --tooltip--shadow: var(--shadown-sm);
+    display: none;
+    position: absolute;
+    color: var(--tooltip--color);
+    background-color: var(--tooltip--background-color);
+    font-size: var(--tooltip--font-size);
+    padding: var(--tooltip--spacing);
+    border-radius: var(--tooltip--border-radius);
+    border: var(--tooltip--border);
+    box-shadow: var(--tooltip--shadow);
+}

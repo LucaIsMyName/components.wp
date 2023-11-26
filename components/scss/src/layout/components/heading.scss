@@ -1,0 +1,29 @@
+/*
+@name: heading
+*/
+
+.block.heading {
+    --heading--line-height: var(--line-height-xs);
+
+    :is(h1, h2, h3, h4, h5, h6, p, small) {
+        text-align: var(--heading--text-align, start);
+        line-height: var(--heading--line-height);
+        font-weight: var(--heading--font-weight);
+        
+        &.custom {
+            font-size: var(--heading--font-size);
+
+        }
+
+        line-height: var(--line-height-xs);
+
+        @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+            text-align: var(--heading--text-align-sm, var(--heading--text-align));
+
+        }
+
+        @media (min-width: map-get($map: $media-queries, $key: 'md')) {
+            text-align: var(--heading--text-align-md, var(--heading--text-align-sm));
+        }
+    }
+}

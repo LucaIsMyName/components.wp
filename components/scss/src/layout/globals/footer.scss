@@ -1,0 +1,68 @@
+/* Footer */
+.footer {
+    width: 100%;
+    background-color: var(--footer--background-color);
+    border-top: var(--px) solid var(--color-background-dark);
+
+    @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+        @include flex(row, sm, nowrap);
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    @media (max-width: map-get($map: $media-queries, $key: 'sm')) {
+        padding-bottom: var(--spacing-sm);
+    }
+
+    :where(.brand) {
+        font-size: var(--header--logo-size);
+        width: auto;
+        padding: var(--header--spacing);
+
+        img,
+        svg {
+            height: var(--header--logo-size);
+            width: auto;
+        }
+    }
+
+    :where(.nav-wrapper) {
+        @media (max-width: map-get($map: $media-queries, $key: 'sm')) {
+            padding-inline: var(--header--spacing);
+        }
+    }
+
+    :where(.nav,
+        .nav-wrapper,
+        .menu) {
+        @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+            @include flex(row, sm, nowrap);
+            align-items: center;
+        }
+
+        padding-inline-end: var(--header--spacing);
+
+        li {
+            @media (max-width: map-get($map: $media-queries, $key: 'sm')) {
+                padding-block-end: var(--header--spacing);
+            }
+        }
+
+        :where(ul) {
+
+            list-style: none;
+            margin: 0;
+            padding-inline-start: 0;
+
+        }
+
+        :where(a) {
+            @include nav-link();
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    :where(.nav-action a) {
+        @include button();
+    }
+}

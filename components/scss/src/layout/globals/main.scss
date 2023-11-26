@@ -1,0 +1,243 @@
+::selection {
+    color: var(--color-background);
+    background-color: var(--color-brand);
+}
+
+main {
+    margin-top: var(--header--height);
+}
+
+/* Headlines & Paragraph */
+
+:where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre) {
+    margin: 0;
+    text-wrap: balance;
+}
+
+:where(h1, .h1) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-xxl);
+    line-height: var(--line-height-xxs);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+:where(h2, .h2) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-xl);
+    line-height: var(--line-height-xxs);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+:where(h3, .h3) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-lg);
+    line-height: var(--line-height-xxs);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+:where(h4, .h4) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-md);
+    line-height: var(--line-height-xs);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+:where(h5, .h5) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-sm);
+    line-height: var(--line-height-xs);
+    font-weight: var(--font-weight-semi);
+    letter-spacing: var(--letter-spacing-sm);
+
+}
+
+:where(h6, .h6) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-sm);
+    line-height: var(--line-height-xs);
+    font-weight: var(--font-weight-semi);
+    letter-spacing: var(--letter-spacing-sm);
+
+}
+
+:where(p, .p) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-sm);
+    line-height: var(--line-height-sm);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-sm);
+}
+
+:where(small, .small) {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-fluid-xs);
+    line-height: var(--line-height-md);
+    font-weight: var(--font-weight-regular);
+}
+
+code,
+.code {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-fluid-xs);
+    line-height: var(--line-height-md);
+    font-weight: var(--font-weight-semi);
+
+    p &,
+    li & {
+        display: inline-block;
+        font-size: 0.7em;
+        padding: calc(var(--spacing-em-xxs) * 0.75) var(--spacing-em-xxs);
+        border-radius: var(--border-radius-em-xs);
+        @include button-color('text', 'background', 'text');
+        border-width: var(--px);
+        margin: 0;
+    }
+}
+
+:where(a) {
+    font-size: 1em;
+    color: var(--color-brand-dark, blue);
+    text-decoration-thickness: var(--px);
+    text-decoration-color: var(--color-brand-light);
+}
+
+/*
+Gradient Text Classes
+*/
+@mixin gradientClip($color1: 'brand', $color2: 'secondary') {
+    background: -webkit-linear-gradient(45deg, var(--color-#{$color1}), var(--color-#{$color2}));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 150% 150%;
+    animation: animatedGradient 3s ease infinite;
+
+
+}
+
+@keyframes animatedGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+.gradient {
+    &-text {
+        :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+            @include gradientClip();
+        }
+
+        &-light {
+            :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+                @include gradientClip('background', 'secondary-light');
+            }
+        }
+    }
+
+    &-headlines {
+        :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
+            @include gradientClip();
+        }
+
+        &-light {
+            :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+                @include gradientClip('background', 'secondary-light');
+            }
+        }
+    }
+
+    &-paragraph {
+        :is(p, .p) {
+            @include gradientClip();
+        }
+
+        &-light {
+            :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+                @include gradientClip('background', 'secondary-light');
+            }
+        }
+    }
+}
+
+/*
+WYSIWIG Editor Custom Styles 
+note: if the Text Content can be formatted by the Editor, the HTML Element should get the the 'data-wysiwyg' attribute to apply basic formating to the element
+*/
+
+:where([data-wysiwyg]) {
+    :where(h1, h2, h3, h4, h5, h6, p, small, pre, ul, ol, li):not(:last-child) {
+        margin-block-end: var(--spacing-em-xs, 0.25em);
+    }
+}
+
+:where([data-wysiwyg]) ol,
+:where([data-wysiwyg]) ul {
+    font-size: var(--font-size-fluid-sm);
+    line-height: var(--line-height-md);
+    margin-block: var(--spacing-em-xs, 0.25em);
+
+    li {
+        position: relative;
+        margin-inline-start: var(--spacing-md, 0.25em);
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: calc(var(--spacing-md, 0.25em) * -1);
+            opacity: 0.8;
+        }
+    }
+}
+
+:where([data-wysiwyg]) ul {
+    li::before {
+        content: '— ';
+    }
+}
+
+:where([data-wysiwyg]) ol {
+    li::before {
+        content: '' counter(list-item) '. ';
+    }
+}
+
+/*
+
+404 & Search Page 
+
+*/
+
+.not-found-page,
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--header--height));
+    text-align: start;
+    padding-block: var(--spacing-sm);
+
+    >* {
+        padding-inline: var(--spacing-sm);
+        width: 100%;
+        max-width: var(--size-md);
+    }
+
+    h1 {
+        margin-block: var(--spacing-sm);
+        font-size: var(--font-size-fluid-md);
+    }
+}

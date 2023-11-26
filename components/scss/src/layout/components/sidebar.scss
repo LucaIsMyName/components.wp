@@ -1,0 +1,57 @@
+/*
+@name: sidebar
+*/
+
+.block.sidebar {
+    --sidebar--width: clamp(calc(var(--header--height) * 0.75), 7vw, calc(var(--header--height) * 1.25));
+
+    >.container {
+
+        @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+            @include flex();
+            flex-direction: var(--sidebar--direction);
+        }
+
+        >.sidebar-container {
+            display: block;
+            box-sizing: border-box;
+            position: relative;
+            width: 100%;
+            padding-inline-end: var(--spacing-sm);
+            background-color: var(--sidebar--background-color, transparent);
+            color: var(--sidebar--color);
+            margin-bottom: var(--spacing-sm);
+
+            .sticky {
+
+                @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+                    position: var(--sidebar--position, static);
+                    top: calc(var(--header--height) + var(--spacing-sm));
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                }
+            }
+
+            .text {
+                // padding-inline: var(--block--spacing-x);
+            }
+
+            @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+                flex: 1 1 0%;
+                width:100%;
+                max-width: clamp(calc(var(--sidebar--width-sm) * 0.25), 20vw, calc(var(--sidebar--width-sm) * 0.5));
+            }
+        }
+
+        @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+            >.content {
+                width: calc(100% - clamp(var(--sidebar--width-sm) * 0.25, 20vw, var(--sidebar--width-sm) * 0.5))
+                // flex: 1 1 0%;
+                // max-width: calc(100% - clamp(calc(var(--sidebar--width-sm) * 0.75), 20vw, calc(var(--sidebar--width-sm) * 1.25)));
+            }
+        }
+
+        /* Table of Contents here */
+    }
+}

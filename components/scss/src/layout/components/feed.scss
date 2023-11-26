@@ -1,0 +1,58 @@
+/*
+@name: feed
+*/
+
+.block.feed {
+    --feed--color: var(--color-text-transparent);
+    --feed--bullet-size: var(--spacing-xs);
+
+    .feed-item {
+        @include flex(flex-start, sm);
+        justify-content: var(--feed--align, center);
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: var(--spacing-sm);
+        padding-inline-start: var(--size-1);
+        position: relative;
+        padding-block-end: var(--spacing-sm) + 0.5em;
+
+        &::before {
+            content: var(--feed--before-content, '');
+            position: absolute;
+            top: 0.5em;
+            // left: calc(var(--size-2) / 2);
+            left: 0;
+            width: var(--feed--bullet-size);
+            height: var(--feed--bullet-size);
+            background-color: var(--feed--color);
+            border-radius: var(--border-radius-pill);
+
+        }
+
+        &::after {
+            content: var(--feed--after-content, '');
+            position: absolute;
+            top: calc(0.5em + var(--feed--bullet-size));
+            // left: calc(var(--size-2) / 2 + var(--feed--bullet-size) / 2 - var(--px) / 2);
+            width: var(--px);
+            left: calc(var(--feed--bullet-size) / 2 - var(--px) / 2);
+            height: calc(100% - (0.5em + var(--feed--bullet-size)) + var(--spacing-sm) + 0.5em);
+            background-color: var(--feed--color);
+        }
+
+        .content {
+            @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+                @include flex(row, md);
+            }
+        }
+
+        figure {
+            width: var(--size-3);
+            flex-basis: var(--size-3);
+            flex-shrink: 0;
+            flex-grow: 0;
+            height: auto;
+            margin-bottom: var(--spacing-sm);
+        }
+    }
+}

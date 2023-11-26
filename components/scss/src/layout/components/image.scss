@@ -1,0 +1,15 @@
+/*
+@name: image
+*/
+.block.image {
+    figure {
+        border-radius: var(--image--border-radius, 0);
+        overflow: hidden;
+        box-shadow: var(--image--shadow, none);
+    }
+
+    img {
+        filter:
+            blur(var(--image--blur, 0)) saturate(var(--image--saturate, 1)) contrast(var(--image--contrast, 1)) greyscale(var(--image--greyscale, 1)) hue-rotate(var(--image--hue, 0)) invert(var(--image--invert, 0));
+    }
+}
