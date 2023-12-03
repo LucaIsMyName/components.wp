@@ -45,10 +45,13 @@
     .navigations {
         @include flex(row, sm, nowrap);
         align-items: center;
+        font-family: var(--font-family-display);
     }
 
     .menu-action-nav .menu-item a {
         @include flex(row, xxs);
+        font-family: var(--font-family-display);
+
 
         ::before {
             content: '';
@@ -81,6 +84,7 @@
     :where(.toggle-mobile-nav) {
         // padding: var(--spacing-em-xxs);
         display: grid;
+        display: none;
         place-content: center;
         // width: var(--size-1);
         line-height: 1;
@@ -91,6 +95,7 @@
 
         button {
             align-items: center;
+            display: flex;
 
             >* {
                 pointer-events: none;
@@ -98,8 +103,15 @@
         }
     }
 
-    :where(.menu-main-nav-container, .nav-action) {
+    .nav-action {
         display: none;
+        @media screen and (min-width:map-get($map: $media-queries, $key: 'sm')) {
+            display: initial;
+        }
+    }
+
+    :where(.menu-main-nav-container ) {
+        // display: none;
 
         @media screen and (min-width:map-get($map: $media-queries, $key: 'sm')) {
             display: initial;
@@ -107,19 +119,37 @@
     }
 
     .menu-main-nav-container {
-        a::before {
-            content: '#';
-            font-size: 1em;
-            display: inline-block;
-            margin-inline-end: calc(var(--spacing-xxs) / 4);
-            color: var(--color-text-light);
-            opacity: 0.5;
+        a {
+            &::before {
+                content: '#';
+                font-size: 1em;
+                display: inline-block;
+                // margin-inline-end: calc(var(--spacing-xxs) / 4);
+                color: var(--header--color-before-el);
+                opacity: 0.5;
+            }
         }
     }
 
-    :where(.nav) {
-        margin-inline-end: var(--header--spacing);
+    .menu-action-nav-container {
+        a {
+            @include flex(row, 0, nowrap);
+
+            &::before {
+                content: '@';
+                font-size: 1em;
+                display: block;
+                margin-inline-end: calc(var(--spacing-xxs) / 4);
+                color: var(--header--color-before-el);
+                opacity: 0.5;
+            }
+        }
+
     }
+
+    // :where(.nav) {
+    //     // margin-inline-end: var(--header--spacing);
+    // }
 
     :where(.nav,
         .menu) {
@@ -168,6 +198,8 @@
 
     .navigations {
         margin-inline: var(--header--spacing);
+        font-family: var(--font-family-display);
+
     }
 
     .brand {
@@ -194,6 +226,11 @@
             width: var(--header--logo-size);
             border: none;
 
+            svg {
+                height: var(--header--logo-size);
+                width: var(--header--logo-size);
+            }
+
             >* {
                 pointer-events: none;
             }
@@ -201,6 +238,22 @@
 
 
 
+    }
+
+    .mobile-main-nav {
+        a {
+            @include flex(row, 0, nowrap);
+
+            &::before {
+                content: '#';
+                font-size: 1em;
+                display: block;
+                margin-inline-end: calc(var(--spacing-xxs) / 4);
+                color: var(--header--color-before-el);
+                opacity: 0.5;
+
+            }
+        }
     }
 
     .mobile-main-nav a,
@@ -246,6 +299,17 @@
             font-size: var(--font-size-fluid-sm);
             @include button();
             text-decoration: none;
+            @include flex(row, 0, nowrap);
+
+            &::before {
+                content: '@';
+                font-size: 1em;
+                display: block;
+                margin-inline-end: calc(var(--spacing-xxs) / 4);
+                color: var(--header--color-before-el);
+                opacity: 0.5;
+
+            }
         }
     }
 

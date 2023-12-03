@@ -58,11 +58,25 @@
 
         :where(a) {
             @include nav-link();
-            font-size: var(--font-size-sm);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-sm);
         }
     }
 
     :where(.nav-action a) {
         @include button();
+        width: min-content;
+        @include flex(row, 0);
+
+        &::before {
+            content: '@';
+            font-size: 1em;
+            display: block;
+            margin-inline-end: calc(var(--spacing-xxs) / 4);
+            color: var(--header--color-before-el);
+            opacity: 0.5;
+
+        }
+
     }
 }

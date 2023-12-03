@@ -15,6 +15,7 @@
     /* 2 */
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header--height) + var(--header--spacing));
+    font-variant-ligatures: common-ligatures;
 }
 
 /* Sections
@@ -120,6 +121,12 @@
     /* 2 */
 }
 
+
+[contenteditable] {
+    &:focus {
+        outline: none;
+    }
+}
 /**
    * Add the correct font size in all browsers.
    */

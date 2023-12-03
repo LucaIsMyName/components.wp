@@ -17,7 +17,7 @@
     /* Columns Fluid */
     --columns-fluid--column-min-width: var(--size-<?= $attributes['column-min-width'] ?>);
     --columns-fluid--gap: var(--spacing-<?= $attributes['gap'] ?>);
-    --columns-fluid--align: var(--spacing-<?= $attributes['columns-align'] ?>);
+    --columns-fluid--align: <?= $attributes['columns-align'] ?>;
     "
     data-viewport>
     <div class="[ container ]">

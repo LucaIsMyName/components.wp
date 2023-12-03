@@ -6,14 +6,20 @@
     display: var(--block--display, block);
     z-index: var(--block--z-index, initial);
     position: relative;
+    background-image: url(var(--block--bg-imge, none));
+    background-position: var(--block--bg-position, center);
+    background-repeat: var(--block--bg-repeat, no-repeat);
+    background-size: var(--block--bg-size, cover);
+
     @media screen and (min-width: map-get($map: $media-queries, $key: 'xs')) {
         display: var(--block--display-sm, block);
     }
+
     &::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: var(--wrapper--gradient, none);
+        background: var(--block--gradient, none);
         z-index: 0;
         background-position: center;
         background-repeat: no-repeat;

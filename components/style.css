@@ -27,6 +27,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --header--opacity: 0.85;
   --header--blur: var(--blur-lg);
   --header--border-color: var(--color-background-dark);
+  --header--color-before-el: var(--color-text-transparent);
   /*Footer*/
   --footer--background-color: var(--color-background);
   /* Divider */
@@ -212,10 +213,10 @@ Use it to make something cool, have fun, and share what you've learned with othe
                   var(--hsl-brightness),
                   33%);
   /* Font Families */
-  --font-family-sans: "Inter", -apple-system, Inter, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-family-mono: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-sans: geist-sans, -apple-system, Inter, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-mono: geist-mono, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-family-serif: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
-  --font-family-display: "Inter", -apple-system, Inter, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-display: geist-mono, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* Font Sizes */
   --font-size-xxs: 0.5rem;
   --font-size-xs: 0.75rem;
@@ -261,9 +262,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
   /* Line Heights */
   --line-height-xxs: 0.98;
   --line-height-xs: 1.05;
-  --line-height-sm: 1.2;
+  --line-height-sm: 1.25;
   --line-height-md: 1.33;
-  --line-height-lg: 1.5;
+  --line-height-lg: 1.6;
   --line-height-xl: 1.75;
   --line-height-xxl: 2;
   /* Letter Spacing */
@@ -365,6 +366,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   /* 2 */
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header--height) + var(--header--spacing));
+  font-variant-ligatures: common-ligatures;
 }
 
 /* Sections
@@ -458,6 +460,10 @@ samp) {
   /* 1 */
   font-size: 1em;
   /* 2 */
+}
+
+[contenteditable]:focus {
+  outline: none;
 }
 
 /**
@@ -709,7 +715,7 @@ select) {
 
 :where(button) {
   color: var(--color-text);
-  background: linear-gradient(to bottom, var(--color-transparent), var(--color-transparent-dark));
+  background-color: var(--color-transparent);
   display: inline-block;
   vertical-align: baseline;
   padding-inline: var(--spacing-em-sm);
@@ -781,22 +787,182 @@ select) {
   z-index: 100000;
 }
 
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 100;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-UltraLight.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 200;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 300;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-Thin.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 400;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 500;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 600;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 700;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 800;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-Black.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-mono;
+  font-style: normal;
+  font-weight: 900;
+  font-display: "swap";
+  src: url("./fonts/geist-mono/GeistMono-UltraBlack.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 100;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-UltraLight.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 200;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 300;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-Thin.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 400;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 500;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 800;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-Black.woff2") format("woff2");
+}
+@font-face {
+  font-family: geist-sans;
+  font-style: normal;
+  font-weight: 900;
+  font-display: "swap";
+  src: url("./fonts/geist-sans/Geist-UltraBlack.woff2") format("woff2");
+}
 .splash-screen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: var(--color-background);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 99999999;
 }
 .splash-screen .icon {
-  font-size: 24px;
+  font-size: var(--size-1);
+  width: var(--size-1);
+  height: var(--size-1);
+  background-color: var(--color-brand);
+  border-radius: var(--border-radius-pill);
+  position: relative;
+}
+.splash-screen .icon::before, .splash-screen .icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: var(--size-1);
+  height: var(--size-1);
+  background-color: var(--color-brand-light);
+  z-index: 10;
+  mix-blend-mode: multiply;
+  border-radius: var(--border-radius-pill);
+  animation-name: splash-screen-animation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.splash-screen .icon::before {
+  animation-direction: reverse;
+}
+.splash-screen .icon::after {
+  animation-direction: normal;
 }
 
+@keyframes splash-screen-animation {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
 [data-tooltip] {
   cursor: help;
   text-decoration: underline;
@@ -884,10 +1050,12 @@ select) {
   display: flex;
   gap: var(--spacing-sm);
   align-items: center;
+  font-family: var(--font-family-display);
 }
 .header .menu-action-nav .menu-item a {
   display: flex;
   gap: var(--spacing-xxs);
+  font-family: var(--font-family-display);
 }
 .header .menu-action-nav .menu-item a ::before {
   content: "";
@@ -906,6 +1074,7 @@ select) {
 }
 .header :where(.toggle-mobile-nav) {
   display: grid;
+  display: none;
   place-content: center;
   line-height: 1;
   aspect-ratio: 1/1;
@@ -915,15 +1084,21 @@ select) {
 }
 .header :where(.toggle-mobile-nav) button {
   align-items: center;
+  display: flex;
 }
 .header :where(.toggle-mobile-nav) button > * {
   pointer-events: none;
 }
-.header :where(.menu-main-nav-container, .nav-action) {
+.header .nav-action {
   display: none;
 }
 @media screen and (min-width: 769px) {
-  .header :where(.menu-main-nav-container, .nav-action) {
+  .header .nav-action {
+    display: initial;
+  }
+}
+@media screen and (min-width: 769px) {
+  .header :where(.menu-main-nav-container) {
     display: initial;
   }
 }
@@ -931,12 +1106,19 @@ select) {
   content: "#";
   font-size: 1em;
   display: inline-block;
-  margin-inline-end: calc(var(--spacing-xxs) / 4);
-  color: var(--color-text-light);
+  color: var(--header--color-before-el);
   opacity: 0.5;
 }
-.header :where(.nav) {
-  margin-inline-end: var(--header--spacing);
+.header .menu-action-nav-container a {
+  display: flex;
+}
+.header .menu-action-nav-container a::before {
+  content: "@";
+  font-size: 1em;
+  display: block;
+  margin-inline-end: calc(var(--spacing-xxs) / 4);
+  color: var(--header--color-before-el);
+  opacity: 0.5;
 }
 .header :where(.nav,
 .menu) {
@@ -966,7 +1148,7 @@ select) {
 }
 .header :where(.nav-action a) {
   color: var(--color-text);
-  background: linear-gradient(to bottom, var(--color-transparent), var(--color-transparent-dark));
+  background-color: var(--color-transparent);
   display: inline-block;
   vertical-align: baseline;
   padding-inline: var(--spacing-em-sm);
@@ -1006,6 +1188,7 @@ select) {
 }
 [data-modal-active=true].mobile-nav-container .navigations {
   margin-inline: var(--header--spacing);
+  font-family: var(--font-family-display);
 }
 [data-modal-active=true].mobile-nav-container .brand {
   display: flex;
@@ -1028,8 +1211,23 @@ select) {
   width: var(--header--logo-size);
   border: none;
 }
+[data-modal-active=true].mobile-nav-container .brand .close svg {
+  height: var(--header--logo-size);
+  width: var(--header--logo-size);
+}
 [data-modal-active=true].mobile-nav-container .brand .close > * {
   pointer-events: none;
+}
+[data-modal-active=true].mobile-nav-container .mobile-main-nav a {
+  display: flex;
+}
+[data-modal-active=true].mobile-nav-container .mobile-main-nav a::before {
+  content: "#";
+  font-size: 1em;
+  display: block;
+  margin-inline-end: calc(var(--spacing-xxs) / 4);
+  color: var(--header--color-before-el);
+  opacity: 0.5;
 }
 [data-modal-active=true].mobile-nav-container .mobile-main-nav a,
 [data-modal-active=true].mobile-nav-container .mobile-main-nav li {
@@ -1068,7 +1266,7 @@ select) {
 [data-modal-active=true].mobile-nav-container .mobile-action-nav a {
   font-size: var(--font-size-fluid-sm);
   color: var(--color-text);
-  background: linear-gradient(to bottom, var(--color-transparent), var(--color-transparent-dark));
+  background-color: var(--color-transparent);
   display: inline-block;
   vertical-align: baseline;
   padding-inline: var(--spacing-em-sm);
@@ -1081,6 +1279,15 @@ select) {
   transition: color 0.3s ease, background-color 0.3s ease;
   will-change: auto;
   text-decoration: none;
+  display: flex;
+}
+[data-modal-active=true].mobile-nav-container .mobile-action-nav a::before {
+  content: "@";
+  font-size: 1em;
+  display: block;
+  margin-inline-end: calc(var(--spacing-xxs) / 4);
+  color: var(--header--color-before-el);
+  opacity: 0.5;
 }
 
 /* Footer */
@@ -1150,6 +1357,7 @@ select) {
 .menu) :where(a) {
   color: var(--color-text);
   text-decoration: none;
+  font-family: var(--font-family-display);
   font-size: var(--font-size-sm);
 }
 .footer :where(.nav,
@@ -1161,7 +1369,7 @@ select) {
 }
 .footer :where(.nav-action a) {
   color: var(--color-text);
-  background: linear-gradient(to bottom, var(--color-transparent), var(--color-transparent-dark));
+  background-color: var(--color-transparent);
   display: inline-block;
   vertical-align: baseline;
   padding-inline: var(--spacing-em-sm);
@@ -1173,6 +1381,16 @@ select) {
   font-weight: var(--font-weight-semi);
   transition: color 0.3s ease, background-color 0.3s ease;
   will-change: auto;
+  width: min-content;
+  display: flex;
+}
+.footer :where(.nav-action a)::before {
+  content: "@";
+  font-size: 1em;
+  display: block;
+  margin-inline-end: calc(var(--spacing-xxs) / 4);
+  color: var(--header--color-before-el);
+  opacity: 0.5;
 }
 
 ::selection {
@@ -1187,11 +1405,11 @@ main {
 /* Headlines & Paragraph */
 :where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre) {
   margin: 0;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 
 :where(h1, .h1) {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-display);
   font-size: var(--font-size-fluid-xxl);
   line-height: var(--line-height-xxs);
   font-weight: var(--font-weight-regular);
@@ -1199,7 +1417,7 @@ main {
 }
 
 :where(h2, .h2) {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-display);
   font-size: var(--font-size-fluid-xl);
   line-height: var(--line-height-xxs);
   font-weight: var(--font-weight-regular);
@@ -1207,7 +1425,7 @@ main {
 }
 
 :where(h3, .h3) {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-display);
   font-size: var(--font-size-fluid-lg);
   line-height: var(--line-height-xxs);
   font-weight: var(--font-weight-regular);
@@ -1215,7 +1433,7 @@ main {
 }
 
 :where(h4, .h4) {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-display);
   font-size: var(--font-size-fluid-md);
   line-height: var(--line-height-xs);
   font-weight: var(--font-weight-regular);
@@ -1244,6 +1462,7 @@ main {
   line-height: var(--line-height-sm);
   font-weight: var(--font-weight-regular);
   letter-spacing: var(--letter-spacing-sm);
+  text-wrap: pretty;
 }
 
 :where(small, .small) {
@@ -1251,6 +1470,7 @@ main {
   font-size: var(--font-size-fluid-xs);
   line-height: var(--line-height-md);
   font-weight: var(--font-weight-regular);
+  text-wrap: pretty;
 }
 
 code,
@@ -1259,19 +1479,20 @@ code,
   font-size: var(--font-size-fluid-xs);
   line-height: var(--line-height-md);
   font-weight: var(--font-weight-semi);
+  border: var(--px) solid var(--color-background-dark);
 }
 p code, li code,
 p .code,
 li .code {
   display: inline-block;
   font-size: 0.7em;
-  padding: calc(var(--spacing-em-xxs) * 0.75) var(--spacing-em-xxs);
+  padding: calc(var(--spacing-em-xxs) * 0.75) var(--spacing-em-xs);
   border-radius: var(--border-radius-em-xs);
-  background: linear-gradient(45deg, var(--color-background), var(--color-background-dark));
+  background-color: var(--color-background);
   color: var(--color-text);
   border-color: var(--color-text);
   border-width: var(--px);
-  margin: 0;
+  margin: 0 var(--spacing-em-xxs) var(--spacing-em-xxs) 0;
 }
 
 :where(a) {
@@ -1279,63 +1500,6 @@ li .code {
   color: var(--color-brand-dark, blue);
   text-decoration-thickness: var(--px);
   text-decoration-color: var(--color-brand-light);
-}
-
-/*
-Gradient Text Classes
-*/
-@keyframes animatedGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-.gradient-text :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-  background: -webkit-linear-gradient(45deg, var(--color-brand), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 150% 150%;
-  animation: animatedGradient 3s ease infinite;
-}
-.gradient-text-light :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-  background: -webkit-linear-gradient(45deg, var(--color-background), var(--color-secondary-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 150% 150%;
-  animation: animatedGradient 3s ease infinite;
-}
-.gradient-headlines :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
-  background: -webkit-linear-gradient(45deg, var(--color-brand), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 150% 150%;
-  animation: animatedGradient 3s ease infinite;
-}
-.gradient-headlines-light :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-  background: -webkit-linear-gradient(45deg, var(--color-background), var(--color-secondary-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 150% 150%;
-  animation: animatedGradient 3s ease infinite;
-}
-.gradient-paragraph :is(p, .p) {
-  background: -webkit-linear-gradient(45deg, var(--color-brand), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 150% 150%;
-  animation: animatedGradient 3s ease infinite;
-}
-.gradient-paragraph-light :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-  background: -webkit-linear-gradient(45deg, var(--color-background), var(--color-secondary-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 150% 150%;
-  animation: animatedGradient 3s ease infinite;
 }
 
 /*
@@ -1427,7 +1591,7 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
 }
 .block.accordion .accordion-item {
   margin-block-start: var(--accordion--spacing);
-  border-block-end: var(--px) solid var(--color-text);
+  border-block-end: var(--px) solid var(--color-background-dark);
 }
 .block.accordion .title {
   display: flex;
@@ -1680,7 +1844,7 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
 }
 .block.buttons .button {
   color: var(--color-text);
-  background: linear-gradient(to bottom, var(--color-transparent), var(--color-transparent-dark));
+  background-color: var(--color-transparent);
   display: inline-block;
   vertical-align: baseline;
   padding-inline: var(--spacing-em-sm);
@@ -1722,25 +1886,25 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   height: auto;
 }
 .block.buttons .button.primary {
-  background: linear-gradient(45deg, var(--color-brand), var(--color-brand-dark));
+  background-color: var(--color-brand);
   color: var(--color-background);
   border-color: var(--color-text);
   border-width: var(--px);
 }
 .block.buttons .button.secondary {
-  background: linear-gradient(45deg, var(--color-background), var(--color-background-dark));
+  background-color: var(--color-background);
   color: var(--color-text);
   border-color: var(--color-text);
   border-width: var(--px);
 }
 .block.buttons .button.default {
-  background: linear-gradient(45deg, var(--color-background), var(--color-background-dark));
+  background-color: var(--color-background);
   color: var(--color-text);
   border-color: var(--color-text);
   border-width: var(--px);
 }
 .block.buttons .button.disabled {
-  background: linear-gradient(45deg, var(--color-background), var(--color-background-dark));
+  background-color: var(--color-background);
   color: var(--color-text-transparent);
   border-color: var(--color-text-transparent);
   border-width: var(--px);
@@ -1828,10 +1992,6 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
 /*
 @name: feed
 */
-.block.feed {
-  --feed--color: var(--color-text-transparent);
-  --feed--bullet-size: var(--spacing-xs);
-}
 .block.feed .feed-item {
   display: flex;
   flex-direction: flex-start;
@@ -1840,42 +2000,56 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: var(--spacing-sm);
-  padding-inline-start: var(--size-1);
+  padding-inline-start: calc(var(--feed--bullet-size) + var(--spacing-sm));
   position: relative;
-  padding-block-end: var(--spacing-sm)0.5em;
+  padding-block-end: var(--spacing-sm)0.33em;
+  font-size: var(--feed--bullet-size);
 }
 .block.feed .feed-item::before {
   content: var(--feed--before-content, "");
   position: absolute;
-  top: 0.5em;
+  top: 0.33em;
   left: 0;
   width: var(--feed--bullet-size);
   height: var(--feed--bullet-size);
   background-color: var(--feed--color);
-  border-radius: var(--border-radius-pill);
+  border-radius: var(--feed--bullet-radius);
 }
 .block.feed .feed-item::after {
   content: var(--feed--after-content, "");
   position: absolute;
-  top: calc(0.5em + var(--feed--bullet-size));
-  width: var(--px);
+  top: calc(0.33em + var(--feed--bullet-size));
+  width: 0;
+  border-inline: calc(var(--px) / 2) var(--feed--line-style) var(--feed--accent-color);
   left: calc(var(--feed--bullet-size) / 2 - var(--px) / 2);
-  height: calc(100% - (0.5em + var(--feed--bullet-size)) + var(--spacing-sm) + 0.5em);
-  background-color: var(--feed--color);
 }
-@media (min-width: 769px) {
-  .block.feed .feed-item .content {
-    display: flex;
-    gap: var(--spacing-md);
-  }
+.block.feed .feed-item:not(:last-child)::after {
+  height: calc(100% - (0.33em + var(--feed--bullet-size)) + var(--spacing-sm) + 0.33em);
+}
+.block.feed .feed-item:last-child::after {
+  height: calc(100% - (0.33em + var(--feed--bullet-size)));
+}
+.block.feed .feed-item.no-bullets {
+  padding-inline-start: 0;
+}
+.block.feed .feed-item.no-bullets::after, .block.feed .feed-item.no-bullets::before {
+  content: none;
+}
+.block.feed .feed-item .content {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+.block.feed .feed-item .text {
+  min-width: var(--size-xxs);
+  flex: 1 1 0%;
 }
 .block.feed .feed-item figure {
-  width: var(--size-3);
-  flex-basis: var(--size-3);
+  width: var(--feed--image-size);
+  flex-basis: var(--feed--image-size);
   flex-shrink: 0;
   flex-grow: 0;
   height: auto;
-  margin-bottom: var(--spacing-sm);
 }
 
 .block.form {
@@ -1914,7 +2088,7 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
 .block.form > .container > form :where([type=submit]) {
   font-size: var(---form--submit-font-size);
   color: var(--color-background);
-  background: linear-gradient(to bottom, var(--color-brand), var(--color-brand-dark));
+  background-color: var(--color-brand);
   display: inline-block;
   vertical-align: baseline;
   padding-inline: var(--spacing-em-sm);
@@ -1933,25 +2107,24 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
 /*
 @name: heading
 */
-.block.heading {
-  --heading--line-height: var(--line-height-xs);
-}
-.block.heading :is(h1, h2, h3, h4, h5, h6, p, small) {
+.block.heading :is(h1, h2, h3, h4, h5, h6, p, small, code, pre, blockquote) {
   text-align: var(--heading--text-align, start);
   line-height: var(--heading--line-height);
   font-weight: var(--heading--font-weight);
-  line-height: var(--line-height-xs);
+  text-transform: var(--heading--text-transform);
+  letter-spacing: var(--heading--letter-spacing);
+  font-family: var(--heading--font-family);
 }
-.block.heading :is(h1, h2, h3, h4, h5, h6, p, small).custom {
+.block.heading :is(h1, h2, h3, h4, h5, h6, p, small, code, pre, blockquote).custom {
   font-size: var(--heading--font-size);
 }
 @media (min-width: 769px) {
-  .block.heading :is(h1, h2, h3, h4, h5, h6, p, small) {
+  .block.heading :is(h1, h2, h3, h4, h5, h6, p, small, code, pre, blockquote) {
     text-align: var(--heading--text-align-sm, var(--heading--text-align));
   }
 }
 @media (min-width: 960px) {
-  .block.heading :is(h1, h2, h3, h4, h5, h6, p, small) {
+  .block.heading :is(h1, h2, h3, h4, h5, h6, p, small, code, pre, blockquote) {
     text-align: var(--heading--text-align-md, var(--heading--text-align-sm));
   }
 }
@@ -2001,9 +2174,29 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   border-radius: var(--image--border-radius, 0);
   overflow: hidden;
   box-shadow: var(--image--shadow, none);
+  outline: var(--px) solid var(--image--border-color, transparent);
+  outline-offset: calc(var(--px) * -1);
+  position: relative;
 }
 .block.image img {
   filter: blur(var(--image--blur, 0)) saturate(var(--image--saturate, 1)) contrast(var(--image--contrast, 1)) greyscale(var(--image--greyscale, 1)) hue-rotate(var(--image--hue, 0)) invert(var(--image--invert, 0));
+}
+.block.image .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: var(--spacing-em-lg) var(--spacing-em-sm) var(--spacing-em-sm);
+  color: var(--color-background);
+  font-family: var(--font-family-sans);
+  text-shadow: var(--shadow-xs);
+  background: linear-gradient(to bottom, transparent, var(--color-text-transparent));
+}
+.block.image .caption > * {
+  font-size: var(--font-size-fluid-xxs);
+  letter-spacing: var(--lterr-spacing-lg);
+  line-height: var(--line-height-xs);
 }
 
 /*
@@ -2232,6 +2425,10 @@ body:has([data-modal-active=true]) :is(.header, .footer) {
   display: var(--block--display, block);
   z-index: var(--block--z-index, initial);
   position: relative;
+  background-image: url(var(--block--bg-imge, none));
+  background-position: var(--block--bg-position, center);
+  background-repeat: var(--block--bg-repeat, no-repeat);
+  background-size: var(--block--bg-size, cover);
 }
 @media screen and (min-width: 560px) {
   .block.wrapper {
@@ -2242,7 +2439,7 @@ body:has([data-modal-active=true]) :is(.header, .footer) {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--wrapper--gradient, none);
+  background: var(--block--gradient, none);
   z-index: 0;
   background-position: center;
   background-repeat: no-repeat;
@@ -2361,7 +2558,7 @@ body:has([data-modal-active=true]) :is(.header, .footer) {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
-  min-width: var(--columns-fluid--column-min-width, 320px);
+  min-width: min(100%, var(--columns-fluid--column-min-width, 320px) * 0.5);
   max-width: 100%;
 }
 

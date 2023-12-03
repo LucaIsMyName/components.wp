@@ -3,19 +3,22 @@
 */
 
 .block.heading {
-    --heading--line-height: var(--line-height-xs);
+    // --heading--line-height: var(--line-height-xs);
 
-    :is(h1, h2, h3, h4, h5, h6, p, small) {
+    :is(h1, h2, h3, h4, h5, h6, p, small, code, pre, blockquote) {
         text-align: var(--heading--text-align, start);
         line-height: var(--heading--line-height);
         font-weight: var(--heading--font-weight);
-        
+        text-transform: var(--heading--text-transform);
+        letter-spacing: var(--heading--letter-spacing);
+        font-family: var(--heading--font-family);
+
         &.custom {
             font-size: var(--heading--font-size);
 
         }
 
-        line-height: var(--line-height-xs);
+        // line-height: var(--line-height-xs);
 
         @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
             text-align: var(--heading--text-align-sm, var(--heading--text-align));

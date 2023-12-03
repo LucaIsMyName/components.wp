@@ -6,10 +6,32 @@
         border-radius: var(--image--border-radius, 0);
         overflow: hidden;
         box-shadow: var(--image--shadow, none);
+        outline: var(--px) solid var(--image--border-color, transparent);
+        outline-offset: calc(var(--px) * -1);
+        position: relative;
     }
 
     img {
         filter:
             blur(var(--image--blur, 0)) saturate(var(--image--saturate, 1)) contrast(var(--image--contrast, 1)) greyscale(var(--image--greyscale, 1)) hue-rotate(var(--image--hue, 0)) invert(var(--image--invert, 0));
+    }
+
+    .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: var(--spacing-em-lg) var(--spacing-em-sm) var(--spacing-em-sm);
+        color: var(--color-background);
+        font-family: var(--font-family-sans);
+        text-shadow: var(--shadow-xs);
+        background: linear-gradient(to bottom, transparent, var(--color-text-transparent));
+
+        >* {
+            font-size: var(--font-size-fluid-xxs);
+            letter-spacing: var(--lterr-spacing-lg);
+            line-height: var(--line-height-xs);
+        }
     }
 }

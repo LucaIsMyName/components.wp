@@ -19,20 +19,21 @@
     --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
     --block--color-text: var(--color-<?= $attributes['color'] ?>);
     --block--z-index: <?= $attributes['z-index'] ?>;
-    /* Wrapper */
-    <?php if (isset($attributes['background-image']['url'])): ?>
-        --wrapper--background-image: url('<?= esc_url($attributes['background-image']['url']); ?>');
-        --wrapper--background-size: url('<?= $attributes['background-position'] ?>');
+    <?php if (isset($attributes['enable-bg-image'])): ?>
+    --block--bg-image: <?= esc_url($attributes['bg-image']['url']) ?>;
+    --block--bg-position: <?= $attributes['bg-position'] ?>;
+    --block--bg-repeat: <?= $attributes['bg-repeat'] ?>;
+    --block--bg-size: <?= $attributes['bg-size'] ?>;
     <?php endif; ?>
+
     <?php if ($attributes['enable-gradient']): ?>
-        --wrapper--gradient: <?= $attributes['gradient-type'] ?>-gradient(
+        --block--gradient: <?= $attributes['gradient-type'] ?>-gradient(
             <?php if ($attributes['gradient-type'] == 'linear'): ?>
                 to bottom, 
             <?php endif; ?>
             <?= $attributes['gradient-color-1'] ?>, <?= $attributes['gradient-color-2'] ?>)
     <?php else: ?>
-        /* Reset the Gradient */
-        --wrapper--gradient: none;
+        --block--gradient: none;
     <?php endif; ?>
     ">
     <div class="[ container ]">
@@ -48,7 +49,6 @@
                     data-aos-delay="<?= $attributes['onload-delay'] ?>"
                     data-aos-duration="<?= $attributes['onload-easing'] ?>">
                 <?php endif; ?>
-
 
                 <?= $attributes['inner-blocks'] ?>
 

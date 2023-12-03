@@ -12,7 +12,7 @@
             flex-grow: 1;
             flex-shrink: 1;
             flex-basis: 0%;
-            min-width: var(--columns-fluid--column-min-width, 320px);
+            min-width: min(100%, calc(var(--columns-fluid--column-min-width, 320px) * 0.5));
             max-width: 100%;
         }
     }

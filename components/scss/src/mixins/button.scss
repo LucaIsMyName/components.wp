@@ -1,6 +1,6 @@
 @mixin button($color: 'text', $bg-color: 'transparent') {
     color: var(--color-#{$color});
-    background: linear-gradient(to bottom, var(--color-#{$bg-color}),var(--color-#{$bg-color}-dark));
+    background-color: var(--color-#{$bg-color});
     display: inline-block;
     vertical-align: baseline;
     padding-inline: var(--spacing-em-sm);
@@ -34,7 +34,7 @@
 }
 
 @mixin button-color($color: 'text', $background-color: 'background', $border-color: 'text') {
-    background: linear-gradient(45deg, var(--color-#{$background-color}), var(--color-#{$background-color}-dark));
+    background-color: var(--color-#{$background-color});
     color: var(--color-#{$color});
     border-color: var(--color-#{$border-color});
 }

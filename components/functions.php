@@ -26,7 +26,7 @@ function template_enqueue()
     // wp_enqueue_style('template-style', get_stylesheet_uri());
     wp_enqueue_style('template-style', get_template_directory_uri() . '/style.css', array(), time());
 
-    wp_enqueue_script('jquery');
+    // wp_enqueue_script('jquery');
 }
 
 // var_dump(get_stylesheet_uri());
@@ -230,6 +230,7 @@ $lazyblocks = array(
     'sidebar',
     'info-panel',
     'modal',
+    'marquee',
     'feed',
     'accordion',
     'tabs',
@@ -288,3 +289,13 @@ function gutenberg_editor_assets() {
   // Load the theme styles within Gutenberg.
   wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/gutenberg-editor-styles.css'));
 }
+
+/**
+ * Enable vCard Upload 
+ *
+ */
+function be_enable_vcard_upload( $mime_types ){
+    $mime_types['vcf'] = 'text/vcard';
+    return $mime_types;
+  }
+  add_filter('upload_mimes', 'be_enable_vcard_upload' );

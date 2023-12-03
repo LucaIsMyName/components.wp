@@ -1,3 +1,4 @@
+
 ::selection {
     color: var(--color-background);
     background-color: var(--color-brand);
@@ -11,11 +12,11 @@ main {
 
 :where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre) {
     margin: 0;
-    text-wrap: balance;
+    text-wrap: pretty;
 }
 
 :where(h1, .h1) {
-    font-family: var(--font-family-sans);
+    font-family: var(--font-family-display);
     font-size: var(--font-size-fluid-xxl);
     line-height: var(--line-height-xxs);
     font-weight: var(--font-weight-regular);
@@ -23,7 +24,7 @@ main {
 }
 
 :where(h2, .h2) {
-    font-family: var(--font-family-sans);
+    font-family: var(--font-family-display);
     font-size: var(--font-size-fluid-xl);
     line-height: var(--line-height-xxs);
     font-weight: var(--font-weight-regular);
@@ -31,7 +32,7 @@ main {
 }
 
 :where(h3, .h3) {
-    font-family: var(--font-family-sans);
+    font-family: var(--font-family-display);
     font-size: var(--font-size-fluid-lg);
     line-height: var(--line-height-xxs);
     font-weight: var(--font-weight-regular);
@@ -39,7 +40,7 @@ main {
 }
 
 :where(h4, .h4) {
-    font-family: var(--font-family-sans);
+    font-family: var(--font-family-display);
     font-size: var(--font-size-fluid-md);
     line-height: var(--line-height-xs);
     font-weight: var(--font-weight-regular);
@@ -70,6 +71,8 @@ main {
     line-height: var(--line-height-sm);
     font-weight: var(--font-weight-regular);
     letter-spacing: var(--letter-spacing-sm);
+    text-wrap: pretty;
+
 }
 
 :where(small, .small) {
@@ -77,6 +80,8 @@ main {
     font-size: var(--font-size-fluid-xs);
     line-height: var(--line-height-md);
     font-weight: var(--font-weight-regular);
+    text-wrap: pretty;
+
 }
 
 code,
@@ -85,16 +90,17 @@ code,
     font-size: var(--font-size-fluid-xs);
     line-height: var(--line-height-md);
     font-weight: var(--font-weight-semi);
+    border: var(--px) solid var(--color-background-dark);
 
     p &,
     li & {
         display: inline-block;
         font-size: 0.7em;
-        padding: calc(var(--spacing-em-xxs) * 0.75) var(--spacing-em-xxs);
+        padding: calc(var(--spacing-em-xxs) * 0.75) var(--spacing-em-xs);
         border-radius: var(--border-radius-em-xs);
         @include button-color('text', 'background', 'text');
         border-width: var(--px);
-        margin: 0;
+        margin: 0 var(--spacing-em-xxs) var(--spacing-em-xxs) 0;
     }
 }
 
@@ -105,72 +111,90 @@ code,
     text-decoration-color: var(--color-brand-light);
 }
 
-/*
-Gradient Text Classes
-*/
-@mixin gradientClip($color1: 'brand', $color2: 'secondary') {
-    background: -webkit-linear-gradient(45deg, var(--color-#{$color1}), var(--color-#{$color2}));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 150% 150%;
-    animation: animatedGradient 3s ease infinite;
+// /*
+// Gradient Text Classes
+// */
+// @mixin gradientClip($color1: 'brand', $color2: 'secondary') {
+//     background: -webkit-linear-gradient(45deg, var(--color-#{$color1}), var(--color-#{$color2}));
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: transparent;
+//     background-size: 150% 150%;
+//     animation: animatedGradient 3s ease infinite;
 
 
-}
+// }
 
-@keyframes animatedGradient {
-    0% {
-        background-position: 0% 50%;
-    }
+// @keyframes animatedGradient {
+//     0% {
+//         background-position: 0% 50%;
+//     }
 
-    50% {
-        background-position: 100% 50%;
-    }
+//     50% {
+//         background-position: 100% 50%;
+//     }
 
-    100% {
-        background-position: 0% 50%;
-    }
-}
+//     100% {
+//         background-position: 0% 50%;
+//     }
+// }
 
 
 
-.gradient {
-    &-text {
-        :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-            @include gradientClip();
-        }
+// .gradient {
+//     &-text {
+//         :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+//             @include gradientClip();
+//         }
 
-        &-light {
-            :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-                @include gradientClip('background', 'secondary-light');
-            }
-        }
-    }
+//         &-light {
+//             :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+//                 @include gradientClip('background', 'secondary-light');
+//             }
+//         }
 
-    &-headlines {
-        :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
-            @include gradientClip();
-        }
+//         &-secondary {
+//             :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+//                 @include gradientClip('secondary', 'brand-light');
+//             }
+//         }
+//     }
 
-        &-light {
-            :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-                @include gradientClip('background', 'secondary-light');
-            }
-        }
-    }
+//     &-headlines {
+//         :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
+//             @include gradientClip();
+//         }
 
-    &-paragraph {
-        :is(p, .p) {
-            @include gradientClip();
-        }
+//         &-light {
+//             :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
+//                 @include gradientClip('background', 'secondary-light');
+//             }
+//         }
 
-        &-light {
-            :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
-                @include gradientClip('background', 'secondary-light');
-            }
-        }
-    }
-}
+//         &-secondary {
+//             :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
+//                 @include gradientClip('secondary', 'brand-dark');
+//             }
+//         }
+//     }
+
+//     &-paragraph {
+//         :is(p, .p) {
+//             @include gradientClip();
+//         }
+
+//         &-light {
+//             :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+//                 @include gradientClip('background', 'secondary-light');
+//             }
+//         }
+
+//         &-secondary {
+//             :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .p, small, .small, code, .code, pre, .pre, span) {
+//                 @include gradientClip('secondary', 'brand-light');
+//             }
+//         }
+//     }
+// }
 
 /*
 WYSIWIG Editor Custom Styles 

@@ -40,6 +40,7 @@ $fluid-typography--multiply-end: map-get($map: $fluid-typography--multipliers, $
         --header--opacity: 0.85;
         --header--blur: var(--blur-lg);
         --header--border-color: var(--color-background-dark);
+        --header--color-before-el: var(--color-text-transparent);
         /*Footer*/
         --footer--background-color: var(--color-background);
         /* Divider */
@@ -226,10 +227,10 @@ $fluid-typography--multiply-end: map-get($map: $fluid-typography--multipliers, $
                         33%);
 
         /* Font Families */
-        --font-family-sans: 'Inter', -apple-system, Inter, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        --font-family-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --font-family-sans: geist-sans, -apple-system, Inter, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --font-family-mono: geist-mono, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         --font-family-serif: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
-        --font-family-display: 'Inter', -apple-system, Inter, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --font-family-display: geist-mono, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         /* Font Sizes */
         --font-size-xxs: 0.5rem;
         --font-size-xs: 0.75rem;
@@ -259,9 +260,9 @@ $fluid-typography--multiply-end: map-get($map: $fluid-typography--multipliers, $
         /* Line Heights */
         --line-height-xxs: 0.98;
         --line-height-xs: 1.05;
-        --line-height-sm: 1.2;
+        --line-height-sm: 1.25;
         --line-height-md: 1.33;
-        --line-height-lg: 1.5;
+        --line-height-lg: 1.6;
         --line-height-xl: 1.75;
         --line-height-xxl: 2;
         /* Letter Spacing */

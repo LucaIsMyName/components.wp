@@ -1,6 +1,6 @@
 @mixin button-default($color: 'background', $bg-color: 'text') {
     color: var(--color-#{$color});
-    background: linear-gradient(to bottom, var(--color-#{$bg-color}), var(--color-#{$bg-color}-dark));
+    background-color: var(--color-#{$bg-color});
     display: inline-block;
     padding-inline: var(--spacing-em-sm);
     padding-block: var(--spacing-em-xs);

@@ -21,9 +21,9 @@
     --image--greyscale: <?= $attributes['image-greyscale'] ?>%;
     --image--brightness: <?= $attributes['image-brightness'] ?>%;
     --image--border-radius: var(--border-radius-<?= $attributes['image-border-radius'] ?>);
+    --image--border-color: var(--color-<?= $attributes['image-border-color'] ?>);
 
-    "
-    data-viewport>
+    " data-viewport>
     <div class="[ container ]">
         <figure title="">
             <picture>
@@ -34,11 +34,21 @@
                     <source media="(min-width:560px)" srcset="<?= esc_url($attributes['image-tablet']['url']); ?>">
                 <?php endif; ?>
                 <?php if (isset($attributes['image']['url'])): ?>
-                    <!--<img width="1920" src="<?= esc_url($attributes['image']['url']); ?>" alt="<?= esc_attr($attributes['image']['alt']); ?>">-->
-                    <?= wp_get_attachment_image($attributes['image']['id'], 'large'); ?>
+                    <img width="1920" src="<?= esc_url($attributes['image']['url']); ?>"
+                        alt="<?= esc_attr($attributes['image']['alt']); ?>">
+                    <!-- <?= wp_get_attachment_image($attributes['image']['id'], 'large'); ?> -->
                 <?php endif; ?>
             </picture>
-            <figcaption class="vh"></figcaption>
+            <?php if ($attributes['image']['title'] || $attributes['image']['title']): ?>
+                <figcaption class="[ caption ] <?php if ($attributes['enable-caption']): ?><?php else: ?>vh<?php endif; ?>">
+                    <p class="small">
+                        <?= esc_html($attributes['image']['title']); ?>
+                    </p>
+                    <small class="small">
+                        <?= esc_html($attributes['image']['description']); ?>
+                    </small>
+                </figcaption>
+            <?php endif; ?>
         </figure>
     </div>
 </section>

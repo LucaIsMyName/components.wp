@@ -5,6 +5,7 @@
 2. install `lazy-blocks` & `advanced editior tools` plugins via marketplace
 3. install `components` theme
 4. import `block-controls.json` from the `wp-content/themes/components/blocks/` folder intp the lazy block plugin
+5. 
 
 ## to do
 - mobile header and mobile nav menu (toggle + design) (wip)
