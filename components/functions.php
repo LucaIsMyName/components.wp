@@ -33,9 +33,9 @@ function template_enqueue()
 add_action('wp_footer', 'template_footer');
 function template_footer()
 {
-?>
+    ?>
 
-<?php
+    <?php
 }
 add_filter('document_title_separator', 'template_document_title_separator');
 function template_document_title_separator($sep)
@@ -106,14 +106,16 @@ function template_image_insert_override($sizes)
 add_action('widgets_init', 'template_widgets_init');
 function template_widgets_init()
 {
-    register_sidebar(array(
-        'name' => esc_html__('Sidebar Widget Area', 'components'),
-        'id' => 'primary-widget-area',
-        'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-        'after_widget' => '</li>',
-        'before_title' => '<h3 class="widget-title">',
-        'after_title' => '</h3>',
-    ));
+    register_sidebar(
+        array(
+            'name' => esc_html__('Sidebar Widget Area', 'components'),
+            'id' => 'primary-widget-area',
+            'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+            'after_widget' => '</li>',
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
 }
 add_action('wp_head', 'template_pingback_header');
 function template_pingback_header()
@@ -131,9 +133,11 @@ function template_enqueue_comment_reply_script()
 }
 function template_custom_pings($comment)
 {
-?>
-    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>"><?php echo esc_url(comment_author_link()); ?></li>
-<?php
+    ?>
+    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+        <?php echo esc_url(comment_author_link()); ?>
+    </li>
+    <?php
 }
 add_filter('get_comments_number', 'template_comment_count', 0);
 function template_comment_count($count)
@@ -225,6 +229,7 @@ $lazyblocks = array(
     'hero',
     'slider',
     'heading',
+    'table-of-contents',
     'divider',
     'buttons',
     'sidebar',
@@ -259,11 +264,12 @@ add_filter('wp_enqueue_scripts', 'disable_gutenberg_wp_enqueue_scripts', 100);
 
 
 
-function cc_mime_types($mimes) {
+function cc_mime_types($mimes)
+{
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
-  }
-  add_filter('upload_mimes', 'cc_mime_types');
+}
+add_filter('upload_mimes', 'cc_mime_types');
 
 // function get_custom_logo_url()
 // {
@@ -273,9 +279,10 @@ function cc_mime_types($mimes) {
 //     return $image[0];
 // }
 
-add_action("init", function() {
+add_action("init", function () {
     // TODO: Replace with the actual page ID or title
-    if(!is_page("page-without-cache")) return;
+    if (!is_page("page-without-cache"))
+        return;
 
     header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
     header("Pragma: no-cache"); // HTTP 1.0.
@@ -285,17 +292,28 @@ add_action("init", function() {
 // Add backend styles for Gutenberg.
 add_action('enqueue_block_editor_assets', 'gutenberg_editor_assets');
 
-function gutenberg_editor_assets() {
-  // Load the theme styles within Gutenberg.
-  wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/gutenberg-editor-styles.css'));
+function gutenberg_editor_assets()
+{
+    // Load the theme styles within Gutenberg.
+    wp_enqueue_style('my-gutenberg-editor-styles', get_theme_file_uri('/gutenberg-editor-styles.css'));
 }
 
 /**
  * Enable vCard Upload 
  *
  */
-function be_enable_vcard_upload( $mime_types ){
+function be_enable_vcard_upload($mime_types)
+{
     $mime_types['vcf'] = 'text/vcard';
     return $mime_types;
-  }
-  add_filter('upload_mimes', 'be_enable_vcard_upload' );
+}
+add_filter('upload_mimes', 'be_enable_vcard_upload');
+
+
+
+function getIcon($icon = "arrow-up")
+{
+    $getIcon = file_get_contents(get_theme_file_uri('\/icons\/' . $icon . '.svg'));
+    var_dump($getIcon);
+    return $getIcon;
+}

@@ -11,26 +11,46 @@
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>);
+    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
+    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Slider */
     --swiper-theme-color:  var(--color-<?= $attributes['color'] ?>);
     --slider--align-y: <?= $attributes['slider-align-y'] ?>;
-    ">
+    " 
     <div class="[ container ]">
         <section class="[ slider--image-<?= $attributes['slider-style'] ?> ]" <?php if ($attributes['slider-autoplay']): ?>data-swiper-autoplay="2000" <?php endif; ?>>
             <div class="[ swiper-wrapper ]">
                 <?php foreach ($attributes['slider'] as $slide): ?>
-                    <figure class="[ swiper-slide ]" data-viewport title="<?= esc_attr($slide['image']['title']); ?>">
-                        <picture>
-                            <?php if (isset($slide['image-md']['url'])): ?>
-                                <source media="(min-width:960px)" srcset="<?= esc_url($slide['image-md']['url']); ?>">
-                            <?php endif; ?>
-                            <?php if (isset($slide['image']['url'])): ?>
-                                <img width="960" height="960" src="<?= esc_url($slide['image']['url']); ?>"
-                                    alt="<?= esc_attr($slide['image']['alt']); ?>">
-                            <?php endif; ?>
-                        </picture>
+                    <figure class="[ swiper-slide ]" title="<?= esc_attr($slide['image']['title']); ?>">
+                        <?php
+                        // Extract the relative path from the full URL
+                        $upload_dir = wp_upload_dir();
+                        $relative_path = str_replace($upload_dir['baseurl'], '', $slide['image']['url']);
+
+                        // Check if the image is an SVG
+                        if (pathinfo($slide['image']['url'], PATHINFO_EXTENSION) === 'svg') {
+                            // Construct the full path to the SVG file
+                            $svg_path = $upload_dir['basedir'] . $relative_path;
+                            // Read SVG file content and echo it
+                            echo file_get_contents($svg_path);
+                        } else {
+                            // Handle other image formats as before
+                            ?>
+                            <picture>
+                                <?php if (isset($slide['image-desktop']['url'])): ?>
+                                    <source media="(min-width:960px)" srcset="<?= esc_url($slide['image-desktop']['url']); ?>">
+                                <?php endif; ?>
+
+                                <?php if (isset($slide['image']['url'])): ?>
+                                    <img width="1920" src="<?= esc_url($slide['image']['url']); ?>"
+                                        alt="<?= esc_attr($slide['image']['alt']); ?>">
+
+                                <?php endif; ?>
+                            </picture>
+                            <?php
+                        }
+                        ?>
+
                     </figure>
                 <?php endforeach; ?>
             </div>

@@ -70,26 +70,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
 @import 'src/layout/components/forms/input.scss';
 @import 'src/layout/components/forms/select.scss';
 
+@import 'src/custom.scss';
+
 
 /*-----------------
 TESTS
 -----------------*/
-
-// .flex-mixin {
-//     @include flex(row-reverse, 0, nowrap);
-// }
-
-// .button-mixin {
-//     @include button();
-
-// }
-
-
-// .badge-mixin {
-//     @include badge();
-
-// }
-
-// .modal-mixin {
-//     @include modal();
-// }

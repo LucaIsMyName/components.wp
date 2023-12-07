@@ -1,4 +1,6 @@
-
+/*
+@global: main
+*/
 ::selection {
     color: var(--color-background);
     background-color: var(--color-brand);
@@ -92,11 +94,10 @@ code,
     font-weight: var(--font-weight-semi);
     border: var(--px) solid var(--color-background-dark);
 
-    p &,
-    li & {
+    :is(p, .p, small, .small, li, .li, pre, .pre, code, .code, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) & {
         display: inline-block;
         font-size: 0.7em;
-        padding: calc(var(--spacing-em-xxs) * 0.75) var(--spacing-em-xs);
+        padding: calc(0.3em/2) 0.3em;
         border-radius: var(--border-radius-em-xs);
         @include button-color('text', 'background', 'text');
         border-width: var(--px);
@@ -106,9 +107,16 @@ code,
 
 :where(a) {
     font-size: 1em;
-    color: var(--color-brand-dark, blue);
+    color: var(--color-brand, blue);
     text-decoration-thickness: var(--px);
     text-decoration-color: var(--color-brand-light);
+    text-underline-offset: calc(var(--px) * 2);
+    transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+
+    &:is(:hover, :focus) {
+        color: var(--color-brand-dark);
+        text-decoration-color: var(--color-brand, blue);
+    }
 }
 
 // /*

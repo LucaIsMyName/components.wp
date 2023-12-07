@@ -26,7 +26,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --header--color: var(--color-text);
   --header--opacity: 0.85;
   --header--blur: var(--blur-lg);
-  --header--border-color: var(--color-background-dark);
+  --header--border-color: var(--color-text, var(--color-background-dark));
   --header--color-before-el: var(--color-text-transparent);
   /*Footer*/
   --footer--background-color: var(--color-background);
@@ -352,6 +352,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
   --shadow-inset-xxl: inset 48px 48px 96px var(--color-shadow);
 }
 
+/*
+@global: preflight
+*/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -380,6 +383,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
   font-size: var(--font-size-fluid-sm);
   overflow-x: hidden;
   font-family: var(--font-family-sans);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
+}
+
+:where(body) * {
+  transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
 }
 
 /**
@@ -787,6 +797,9 @@ select) {
   z-index: 100000;
 }
 
+/*
+@global: font-face
+*/
 @font-face {
   font-family: geist-mono;
   font-style: normal;
@@ -913,7 +926,10 @@ select) {
   font-display: "swap";
   src: url("./fonts/geist-sans/Geist-UltraBlack.woff2") format("woff2");
 }
-.splash-screen {
+/*
+@global: splash-screen
+*/
+.splash-screen .container {
   position: fixed;
   top: 0;
   left: 0;
@@ -925,7 +941,7 @@ select) {
   align-items: center;
   z-index: 99999999;
 }
-.splash-screen .icon {
+.splash-screen .container .icon {
   font-size: var(--size-1);
   width: var(--size-1);
   height: var(--size-1);
@@ -933,7 +949,7 @@ select) {
   border-radius: var(--border-radius-pill);
   position: relative;
 }
-.splash-screen .icon::before, .splash-screen .icon::after {
+.splash-screen .container .icon::before, .splash-screen .container .icon::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -948,10 +964,10 @@ select) {
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }
-.splash-screen .icon::before {
+.splash-screen .container .icon::before {
   animation-direction: reverse;
 }
-.splash-screen .icon::after {
+.splash-screen .container .icon::after {
   animation-direction: normal;
 }
 
@@ -963,6 +979,9 @@ select) {
     transform: translateX(50%);
   }
 }
+/*
+@global: tooltip
+*/
 [data-tooltip] {
   cursor: help;
   text-decoration: underline;
@@ -991,14 +1010,14 @@ select) {
   box-shadow: var(--tooltip--shadow);
 }
 
-/* Customize the scrollbar */
+/*
+@global: scrollbar
+*/
 ::-webkit-scrollbar {
   width: var(--spacing-xxs);
   height: var(--spacing-xxs);
-  /* Width of the scrollbar */
 }
 
-/* Customize the scrollbar thumb (the draggable part) */
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-text-transparent);
 }
@@ -1007,7 +1026,9 @@ select) {
   background-color: rgba(10, 10, 10, 0.075);
 }
 
-/* Header */
+/*
+@global: header
+*/
 .header {
   z-index: 99999;
   position: fixed;
@@ -1290,7 +1311,9 @@ select) {
   opacity: 0.5;
 }
 
-/* Footer */
+/*
+@global: footer
+*/
 .footer {
   width: 100%;
   background-color: var(--footer--background-color);
@@ -1393,6 +1416,9 @@ select) {
   opacity: 0.5;
 }
 
+/*
+@global: main
+*/
 ::selection {
   color: var(--color-background);
   background-color: var(--color-brand);
@@ -1481,12 +1507,11 @@ code,
   font-weight: var(--font-weight-semi);
   border: var(--px) solid var(--color-background-dark);
 }
-p code, li code,
-p .code,
-li .code {
+:is(p, .p, small, .small, li, .li, pre, .pre, code, .code, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) code,
+:is(p, .p, small, .small, li, .li, pre, .pre, code, .code, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) .code {
   display: inline-block;
   font-size: 0.7em;
-  padding: calc(var(--spacing-em-xxs) * 0.75) var(--spacing-em-xs);
+  padding: 0.15em 0.3em;
   border-radius: var(--border-radius-em-xs);
   background-color: var(--color-background);
   color: var(--color-text);
@@ -1497,9 +1522,15 @@ li .code {
 
 :where(a) {
   font-size: 1em;
-  color: var(--color-brand-dark, blue);
+  color: var(--color-brand, blue);
   text-decoration-thickness: var(--px);
   text-decoration-color: var(--color-brand-light);
+  text-underline-offset: calc(var(--px) * 2);
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+:where(a):is(:hover, :focus) {
+  color: var(--color-brand-dark);
+  text-decoration-color: var(--color-brand, blue);
 }
 
 /*
@@ -1564,10 +1595,12 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   font-size: var(--font-size-fluid-md);
 }
 
-/* Block */
+/*
+@global: block
+*/
 .block {
-  background-color: var(--block--color-background);
-  color: var(--block--color-text);
+  background-color: var(--block--color-background, var(--color-background));
+  color: var(--block--color-text, var(--color-text));
   display: block;
   position: relative;
   margin-block: var(--block--spacing-y, 0);
@@ -1634,7 +1667,7 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
 }
 
 /*
-@name: audioplyer
+@name: audioplayer
 */
 .block.audioplayer {
   --audioplayer--spacing: var(--spacing-em-sm);
@@ -1863,6 +1896,8 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   align-items: center;
   font-weight: var(--buttons--font-weight);
   border-radius: var(--buttons--border-radius);
+  font-family: var(--buttons--font-family);
+  font-weight: var(--buttons--font-weight);
 }
 .block.buttons .button:is(:hover, :focus) {
   opacity: 0.9;
@@ -2052,6 +2087,9 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   height: auto;
 }
 
+/*
+@name: form
+*/
 .block.form {
   --form--label-font-size: var(--font-size-xs);
   --form--input-font-size: var(--font-size-fluid-md);
@@ -2128,6 +2166,16 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
     text-align: var(--heading--text-align-md, var(--heading--text-align-sm));
   }
 }
+.block.heading code,
+.block.heading pre {
+  display: block;
+  width: 100%;
+  overflow-x: scroll;
+  padding: var(--spacing-sm);
+  border: var(--px) solid var(--color-text);
+  background-color: var(--color-background-transparent);
+  font-family: var(--font-family-mono);
+}
 
 /*
 @name: hero
@@ -2174,33 +2222,34 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   border-radius: var(--image--border-radius, 0);
   overflow: hidden;
   box-shadow: var(--image--shadow, none);
-  outline: var(--px) solid var(--image--border-color, transparent);
-  outline-offset: calc(var(--px) * -1);
+  outline: var(--image--border-width, 0) solid var(--image--border-color, transparent);
+  outline-offset: calc(var(--px) * -0.5);
   position: relative;
 }
 .block.image img {
-  filter: blur(var(--image--blur, 0)) saturate(var(--image--saturate, 1)) contrast(var(--image--contrast, 1)) greyscale(var(--image--greyscale, 1)) hue-rotate(var(--image--hue, 0)) invert(var(--image--invert, 0));
+  filter: var(--image--filter);
+  transition: filter var(--transition-fast);
+}
+.block.image img:is(:focus, :hover) {
+  filter: var(--image--filter-hover);
 }
 .block.image .caption {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100%;
-  padding: var(--spacing-em-lg) var(--spacing-em-sm) var(--spacing-em-sm);
+  padding: var(--spacing-em-md) var(--spacing-em-xs) var(--spacing-em-xs);
   color: var(--color-background);
-  font-family: var(--font-family-sans);
-  text-shadow: var(--shadow-xs);
+  text-shadow: var(--text-shadow-xs);
   background: linear-gradient(to bottom, transparent, var(--color-text-transparent));
 }
 .block.image .caption > * {
-  font-size: var(--font-size-fluid-xxs);
-  letter-spacing: var(--lterr-spacing-lg);
-  line-height: var(--line-height-xs);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-em-xs);
 }
 
 /*
-@name: image
+@name: info-panel
 */
 .block.info-panel {
   --info-panel--spacing: var(--spacing-sm);
@@ -2304,6 +2353,11 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
   display: flex;
   justify-content: center;
 }
+.block.slider .swiper-slide svg {
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+}
 
 /*
 @name: tabs
@@ -2366,6 +2420,9 @@ note: if the Text Content can be formatted by the Editor, the HTML Element shoul
 /*
 @name: text
 */
+/*
+@name: modal
+*/
 .block.modal > .container > [data-modal] {
   display: none;
 }
@@ -2425,14 +2482,31 @@ body:has([data-modal-active=true]) :is(.header, .footer) {
   display: var(--block--display, block);
   z-index: var(--block--z-index, initial);
   position: relative;
-  background-image: url(var(--block--bg-imge, none));
+  background-image: var(--block--bg-image, none);
   background-position: var(--block--bg-position, center);
   background-repeat: var(--block--bg-repeat, no-repeat);
   background-size: var(--block--bg-size, cover);
+  fill: var(--block--color-text);
+  stroke: var(--block--color-text);
 }
 @media screen and (min-width: 560px) {
   .block.wrapper {
     display: var(--block--display-sm, block);
+  }
+}
+.block.wrapper > .container {
+  border: var(--block--border-width) var(--block--border-style, solid) var(--block--border-color, transparent);
+}
+@media screen and (min-width: 560px) {
+  .block.wrapper > .container {
+    margin-block: var(--block--spacing-y--sm);
+    padding-inline: var(--block--spacing-x--sm);
+  }
+}
+@media screen and (min-width: 960px) {
+  .block.wrapper > .container {
+    margin-block: var(--block--spacing-y--md);
+    padding-inline: var(--block--spacing-x--md);
   }
 }
 .block.wrapper::before {
@@ -2445,19 +2519,10 @@ body:has([data-modal-active=true]) :is(.header, .footer) {
   background-repeat: no-repeat;
   background-size: cover;
 }
-@media screen and (min-width: 560px) {
-  .block.wrapper {
-    margin-block: var(--block--spacing-y--sm);
-    padding-inline: var(--block--spacing-x--sm);
-  }
-}
-@media screen and (min-width: 960px) {
-  .block.wrapper {
-    margin-block: var(--block--spacing-y--md);
-    padding-inline: var(--block--spacing-x--md);
-  }
-}
 
+/*
+@name: marquee
+*/
 .block.marquee {
   overflow-x: hidden;
 }
@@ -2478,24 +2543,35 @@ body:has([data-modal-active=true]) :is(.header, .footer) {
 /*
 @name: columns-two
 */
+.block.columns-two {
+  --columns-two--column-formula: calc(100% / 2 - var(--columns-two--gap) / 2);
+}
+.block.columns-two > .container {
+  display: flex;
+  flex-direction: var(--columns-two--direction-mobile, column);
+  gap: var(--columns-two--gap, 0);
+  align-items: center;
+  justify-content: var(--columns-two--align, flex-start);
+}
 @media screen and (min-width: 769px) {
   .block.columns-two > .container {
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+    flex-direction: row;
     align-items: var(--columns-two--align, flex-start);
+    justify-content: center;
   }
+}
+.block.columns-two > .container > .block {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: var(--columns-two--width-mobile);
+  max-width: var(--columns-two--width-mobile);
+}
+@media screen and (min-width: 769px) {
   .block.columns-two > .container > .block {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex: 50%;
-    max-width: calc(50% - var(--columns-two--gap, 0) / 2);
-  }
-  .block.columns-two > .container > .block:nth-child(odd) {
-    padding-right: calc(var(--columns-two--gap) / 2);
-  }
-  .block.columns-two > .container > .block:nth-child(even) {
-    padding-left: calc(var(--columns-two--gap) / 2);
+    flex-basis: var(--columns-two--column-formula);
+    max-width: var(--columns-two--column-formula);
+    width: var(--columns-two--column-formula);
   }
 }
 
@@ -2560,6 +2636,214 @@ body:has([data-modal-active=true]) :is(.header, .footer) {
   flex-basis: 0%;
   min-width: min(100%, var(--columns-fluid--column-min-width, 320px) * 0.5);
   max-width: 100%;
+}
+
+/*
+@name: fieldset
+*/
+/*
+@name: input
+*/
+/*
+@name: select
+*/
+/* 
+this part contains te custom overwrites for the specific website design or interactions, all other files serve the design system
+*/
+body:has(:not(#docs[data-viewport=true])) {
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(:not(#docs[data-viewport=true])) :is(h1, h2, h3, h4, h5, h6) {
+  transition: color var(--transition-slow);
+}
+
+body:has(#docs[data-viewport=true]) {
+  --color-text: #231b74;
+  --color-text-dark: #130f3f;
+  --color-text-light: #3126a2;
+  --color-background: #fff;
+  --color-background-light: rgb(254, 254, 249);
+  --color-background-dark: #eee;
+  --color-brand: #231b74;
+  --color-brand-dark: #231b74;
+  --color-brand-light: #231b74;
+  --header--color: #231b74;
+  --header--border-color: ;
+  --header--background-color: #fff;
+  --footer--background-color: #fff;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(#docs[data-viewport=true]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-brand);
+  transition: color var(--transition-slow);
+}
+
+body:has(:not(#kaffeeamt[data-viewport=true])) {
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(:not(#kaffeeamt[data-viewport=true])) :is(h1, h2, h3, h4, h5, h6) {
+  transition: color var(--transition-slow);
+}
+
+body:has(#kaffeeamt[data-viewport=true]) {
+  --color-text: rgb(42, 44, 42);
+  --color-text-dark: rgb(26, 29, 26);
+  --color-text-light: rgb(67, 70, 67);
+  --color-background: rgb(243, 244, 233);
+  --color-background-light: rgb(254, 254, 249);
+  --color-background-dark: rgb(225, 226, 206);
+  --color-brand: rgb(131, 145, 112);
+  --color-brand-dark: rgb(71, 84, 54);
+  --color-brand-light: rgb(178, 190, 160);
+  --header--color: rgb(42, 44, 42);
+  --header--border-color: ;
+  --header--background-color: rgb(243, 244, 233);
+  --footer--background-color: rgb(243, 244, 233);
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(#kaffeeamt[data-viewport=true]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-brand);
+  transition: color var(--transition-slow);
+}
+
+body:has(:not(#barbara-brandmueller[data-viewport=true])) {
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(:not(#barbara-brandmueller[data-viewport=true])) :is(h1, h2, h3, h4, h5, h6) {
+  transition: color var(--transition-slow);
+}
+
+body:has(#barbara-brandmueller[data-viewport=true]) {
+  --color-text: rgb(75, 75, 129);
+  --color-text-dark: rgb(36, 36, 75);
+  --color-text-light: rgb(105, 105, 164);
+  --color-background: rgb(255, 255, 226);
+  --color-background-light: #ffffff;
+  --color-background-dark: rgb(206, 206, 134);
+  --color-brand: #ab2e30;
+  --color-brand-dark: #891f21;
+  --color-brand-light: #ab2e30;
+  --header--color: rgb(75, 75, 129);
+  --header--border-color: ;
+  --header--background-color: rgb(255, 255, 226);
+  --footer--background-color: rgb(255, 255, 226);
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(#barbara-brandmueller[data-viewport=true]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-brand);
+  transition: color var(--transition-slow);
+}
+
+body:has(:not(#saiten-auf-null[data-viewport=true])) {
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(:not(#saiten-auf-null[data-viewport=true])) :is(h1, h2, h3, h4, h5, h6) {
+  transition: color var(--transition-slow);
+}
+
+body:has(#saiten-auf-null[data-viewport=true]) {
+  --color-text: #044222;
+  --color-text-dark: #022a15;
+  --color-text-light: #08984d;
+  --color-background: #fff;
+  --color-background-light: #fff;
+  --color-background-dark: #d3d3d3;
+  --color-brand: #00a650;
+  --color-brand-dark: #03582c;
+  --color-brand-light: #09d069;
+  --header--color: #044222;
+  --header--border-color: ;
+  --header--background-color: #fff;
+  --footer--background-color: #fff;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(#saiten-auf-null[data-viewport=true]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-brand);
+  transition: color var(--transition-slow);
+}
+
+body:has(:not(#tiefwurzler[data-viewport=true])) {
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(:not(#tiefwurzler[data-viewport=true])) :is(h1, h2, h3, h4, h5, h6) {
+  transition: color var(--transition-slow);
+}
+
+body:has(#tiefwurzler[data-viewport=true]) {
+  --color-text: #071810;
+  --color-text-dark: #03100a;
+  --color-text-light: #0f3423;
+  --color-background: #fffaf0;
+  --color-background-light: #fbf9f6;
+  --color-background-dark: #fff2d7;
+  --color-brand: #23764e;
+  --color-brand-dark: #164e33;
+  --color-brand-light: #359969;
+  --header--color: #071810;
+  --header--border-color: ;
+  --header--background-color: #fffaf0;
+  --footer--background-color: #fffaf0;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(#tiefwurzler[data-viewport=true]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-brand);
+  transition: color var(--transition-slow);
+}
+
+body:has(:not(#goldenes-quartier[data-viewport=true])) {
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(:not(#goldenes-quartier[data-viewport=true])) :is(h1, h2, h3, h4, h5, h6) {
+  transition: color var(--transition-slow);
+}
+
+body:has(#goldenes-quartier[data-viewport=true]) {
+  --color-text: #212121;
+  --color-text-dark: #000000;
+  --color-text-light: #3b3b3b;
+  --color-background: #fbf6ea;
+  --color-background-light: #ffffff;
+  --color-background-dark: rgb(233, 226, 215);
+  --color-brand: #998651;
+  --color-brand-dark: #6a5d38;
+  --color-brand-light: rgb(167, 146, 88);
+  --header--color: #212121;
+  --header--border-color: ;
+  --header--background-color: #fbf6ea;
+  --footer--background-color: #fbf6ea;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(#goldenes-quartier[data-viewport=true]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-brand);
+  transition: color var(--transition-slow);
+}
+
+body:has(:not(#hotel-bauer[data-viewport=true])) {
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(:not(#hotel-bauer[data-viewport=true])) :is(h1, h2, h3, h4, h5, h6) {
+  transition: color var(--transition-slow);
+}
+
+body:has(#hotel-bauer[data-viewport=true]) {
+  --color-text: #253555;
+  --color-text-dark: #0e1728;
+  --color-text-light: #354c7a;
+  --color-background: #f8f9fa;
+  --color-background-light: #f8f9fa;
+  --color-background-dark: #c5d1dc;
+  --color-brand: #354c7a;
+  --color-brand-dark: #0e1728;
+  --color-brand-light: #455f92;
+  --header--color: #253555;
+  --header--border-color: ;
+  --header--background-color: #f8f9fa;
+  --footer--background-color: #f8f9fa;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+body:has(#hotel-bauer[data-viewport=true]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-brand);
+  transition: color var(--transition-slow);
 }
 
 /*-----------------

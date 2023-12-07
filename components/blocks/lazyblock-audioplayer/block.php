@@ -15,15 +15,16 @@ $playerId = rand(1000, 9999);
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>);
+    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
+    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Audioplayer */
     --audioplayer--color-background: var(--color-<?= $attributes['audioplayer-background-color'] ?>);
     --audioplayer--color: var(--color-<?= $attributes['audioplayer-color'] ?>);
     --audioplayer--layout:<?= $attributes['audioplayer-layout'] ?>;
     --audioplayer--border-radius: var(--border-radius-<?= $attributes['audioplayer-border-radius'] ?>);
     --audioplayer--cover-border-radius: var(--border-radius-<?= $attributes['audioplayer-cover-border-radius'] ?>);
-    ">
+    "
+    >
     <div class="[ container ]">
         <div class="[ player ]" data-audioplayer data-audioplayer-id="<?= $playerId; ?>">
             <div data-audioplayer-controls class="[ current-track column ]">
@@ -167,3 +168,6 @@ $playerId = rand(1000, 9999);
 <script id="audioplayer-<?= $playerId; ?>">
 
 </script>
+
+
+

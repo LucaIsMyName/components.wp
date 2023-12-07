@@ -1,0 +1,127 @@
+/* 
+this part contains te custom overwrites for the specific website design or interactions, all other files serve the design system
+*/
+
+
+// [data-viewport] {
+//     filter: blur(var(--blur-xxs));
+//     transition: filter var(--transition-slow);
+// }
+
+// [data-viewport="true"] {
+//     filter: blur(0);
+// }
+
+$project-color-schemes: (
+    docs: (text: #231b74,
+        text-dark: #130f3f,
+        text-light: #3126a2,
+        background: #fff,
+        background-light: rgb(254, 254, 249),
+        background-dark: #eee,
+        brand: #231b74,
+        brand-dark: #231b74,
+        brand-light: #231b74,
+    ),
+    kaffeeamt: (text: rgb(42, 44, 42),
+        text-dark: rgb(26, 29, 26),
+        text-light: rgb(67, 70, 67),
+        background: rgb(243, 244, 233),
+        background-light: rgb(254, 254, 249),
+        background-dark: rgb(225, 226, 206),
+        brand: rgb(131, 145, 112),
+        brand-dark: rgb(71, 84, 54),
+        brand-light: rgb(178, 190, 160),
+    ),
+    barbara-brandmueller: (text: rgb(75, 75, 129),
+        text-dark: rgb(36, 36, 75),
+        text-light: rgb(105, 105, 164),
+        background: rgb(255, 255, 226),
+        background-light: #ffffff,
+        background-dark: rgb(206, 206, 134),
+        brand: #ab2e30,
+        brand-dark: #891f21,
+        brand-light: #ab2e30,
+    ),
+    saiten-auf-null: (text: #044222,
+        text-dark: #022a15,
+        text-light: #08984d,
+        background: #fff,
+        background-light: #fff,
+        background-dark: #d3d3d3,
+        brand: #00a650,
+        brand-dark: #03582c,
+        brand-light: #09d069,
+    ),
+    tiefwurzler: (text: #071810,
+        text-dark: #03100a,
+        text-light: #0f3423,
+        background: #fffaf0,
+        background-light: #fbf9f6,
+        background-dark: #fff2d7,
+        brand: #23764e,
+        brand-dark: #164e33,
+        brand-light: #359969,
+    ),
+    goldenes-quartier: (text: #212121,
+        text-dark: #000000,
+        text-light: #3b3b3b,
+        background: #fbf6ea,
+        background-light: #ffffff,
+        background-dark: rgb(233, 226, 215),
+        brand: #998651,
+        brand-dark: #6a5d38,
+        brand-light: rgb(167, 146, 88),
+    ),
+    hotel-bauer: (text: #253555,
+        text-dark: #0e1728,
+        text-light: #354c7a,
+        background: #f8f9fa,
+        background-light: #f8f9fa,
+        background-dark: #c5d1dc,
+        brand: #354c7a,
+        brand-dark: #0e1728,
+        brand-light: #455f92,
+    ),
+
+);
+
+@each $project-name,
+$project-colors in $project-color-schemes {
+
+    // @debug $project;
+    // @debug $colors;
+    body:has(:not(#{"#" + $project-name}[data-viewport="true"])) {
+        transition: background-color var(--transition-slow),
+            color var(--transition-slow);
+
+        :is(h1, h2, h3, h4, h5, h6) {
+            transition: color var(--transition-slow);
+        }
+    }
+
+    body:has(#{"#" + $project-name}[data-viewport="true"]) {
+
+        @each $color-name,
+        $color-value in $project-colors {
+            // @debug $color-name;
+            // @debug $color-value;
+            --color-#{$color-name}: #{$color-value};
+        }
+
+        --header--color: #{map-get($map: $project-colors, $key: "text")};
+        --header--border-color: #{map-get($map: $project-colors, $key: "text-transparent")};
+        --header--background-color: #{map-get($map: $project-colors, $key: "background")};
+        --footer--background-color: #{map-get($map: $project-colors, $key: "background")};
+        transition: background-color var(--transition-slow),
+        color var(--transition-slow);
+
+        // #{"#" + $project-name}[data-viewport="true"] {
+        :is(h1, h2, h3, h4, h5, h6) {
+            color: var(--color-brand);
+            transition: color var(--transition-slow);
+        }
+
+        // }
+    }
+}

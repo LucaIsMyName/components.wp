@@ -10,23 +10,33 @@
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>);
+    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
+    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Image */
-    --image--blur: var(--blur-<?= $attributes['image-blur'] ?>);
-    --image--saturate: <?= $attributes['image-saturate'] ?>%;
-    --image--contrast: <?= $attributes['image-contrast'] ?>%;
-    --image--hue: <?= $attributes['image-hue'] ?>deg;
-    --image--invert: <?= $attributes['image-invert'] ?>;
-    --image--greyscale: <?= $attributes['image-greyscale'] ?>%;
-    --image--brightness: <?= $attributes['image-brightness'] ?>%;
+    --image--filter: <?= $attributes['image-filter'] ?>;
+    --image--filter-hover: <?= $attributes['image-filter-hover'] ?>;
     --image--border-radius: var(--border-radius-<?= $attributes['image-border-radius'] ?>);
+    --image--border-width: calc(var(--px) * <?= $attributes['image-border-width'] ?>);
     --image--border-color: var(--color-<?= $attributes['image-border-color'] ?>);
 
-    " data-viewport>
+    ">
     <div class="[ container ]">
         <figure title="">
-            <picture>
+
+            <?php
+            // Extract the relative path from the full URL
+            $upload_dir = wp_upload_dir();
+            $relative_path = str_replace($upload_dir['baseurl'], '', $attributes['image']['url']);
+
+            // Check if the image is an SVG
+            if (pathinfo($attributes['image']['url'], PATHINFO_EXTENSION) === 'svg') {
+                // Construct the full path to the SVG file
+                $svg_path = $upload_dir['basedir'] . $relative_path;
+                // Read SVG file content and echo it
+                echo file_get_contents($svg_path);
+            } else {
+                // Handle other image formats as before
+                ?>
                 <?php if (isset($attributes['image-desktop']['url'])): ?>
                     <source media="(min-width:960px)" srcset="<?= esc_url($attributes['image-desktop']['url']); ?>">
                 <?php endif; ?>
@@ -36,10 +46,12 @@
                 <?php if (isset($attributes['image']['url'])): ?>
                     <img width="1920" src="<?= esc_url($attributes['image']['url']); ?>"
                         alt="<?= esc_attr($attributes['image']['alt']); ?>">
-                    <!-- <?= wp_get_attachment_image($attributes['image']['id'], 'large'); ?> -->
                 <?php endif; ?>
-            </picture>
-            <?php if ($attributes['image']['title'] || $attributes['image']['title']): ?>
+                <?php
+            }
+            ?>
+
+            <?php if ($attributes['image']['title']): ?>
                 <figcaption class="[ caption ] <?php if ($attributes['enable-caption']): ?><?php else: ?>vh<?php endif; ?>">
                     <p class="small">
                         <?= esc_html($attributes['image']['title']); ?>

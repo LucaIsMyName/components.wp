@@ -21,7 +21,7 @@ $blogUrl = esc_url(home_url('/'));
     <meta charset="<?php bloginfo('charset'); ?>" />
     <meta name="viewport" content="width=device-width" />
     <?php wp_head(); ?>
-   
+
     <link rel="stylesheet" href="<?= get_template_directory_uri() ?>/js/aos/aos.css">
     <link rel="stylesheet" href="<?= get_template_directory_uri() ?>/js/swiper/swiper.css">
 
@@ -42,11 +42,14 @@ $blogUrl = esc_url(home_url('/'));
     <script defer src="<?= get_template_directory_uri() ?>/js/modal.js"></script>
     <script defer src="<?= get_template_directory_uri() ?>/js/marquee.js"></script>
     <script defer src="<?= get_template_directory_uri() ?>/js/flip-content.js"></script>
+    <script defer src="<?= get_template_directory_uri() ?>/js/table-of-contents.js"></script>
 </head>
 
 <body id="body" <?php body_class(); ?> data-scroll-state>
     <div data-splash-screen class="[ splash-screen ]">
-        <div class="[ icon ]"></div>
+        <div class="[ container ]">
+            <div class="[ icon ]"></div>
+        </div>
     </div>
     <!--  <div class="loadingIcon"></div>-->
     <?php wp_body_open(); ?>

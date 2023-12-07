@@ -15,7 +15,7 @@ var swiper_one = new Swiper(".slider--image-one", {
     autoplay: {
         delay: 0,
     },
-    speed: 6000,
+    speed: 3000,
     slidesPerView: 1,
     loop: false,
     pagination: {
@@ -37,7 +37,7 @@ var swiper_two = new Swiper(".slider--image-two", {
     autoplay: {
         delay: 0,
     },
-    speed: 6000,
+    speed: 3000,
     slidesPerView: 1,
     breakpoints: {
         0: {
@@ -68,7 +68,7 @@ var swiper_three = new Swiper(".slider--image-three", {
     autoplay: {
         delay: 0,
     },
-    speed: 6000,
+    speed: 3000,
     slidesPerView: 1,
     breakpoints: {
         // 0: {
@@ -103,7 +103,7 @@ var swiper_four = new Swiper(".slider--image-four", {
     autoplay: {
         delay: 0,
     },
-    speed: 6000,
+    speed: 3000,
     slidesPerView: 2,
     spaceBetween: slider_spaceBetween / 2,
 
@@ -141,7 +141,7 @@ var swiper_five = new Swiper(".slider--image-five", {
     autoplay: {
         delay: 0,
     },
-    speed: 6000,
+    speed: 3000,
     spaceBetween: slider_spaceBetween / 2,
     breakpoints: {
         // 0: {
@@ -180,19 +180,16 @@ var swiper_six = new Swiper(".slider--image-six", {
     autoplay: {
         delay: 0,
     },
-    speed: 6000,
-    slidesPerView: 3,
+    speed: 1500,
+    slidesPerView: 4,
     spaceBetween: slider_spaceBetween / 2,
     breakpoints: {
         769: {
-            slidesPerView: 4,
-            spaceBetween: slider_spaceBetween,
-        },
-        960: {
             slidesPerView: 5,
             spaceBetween: slider_spaceBetween,
         },
         1240: {
+            speed: 2500,
             slidesPerView: 6,
             spaceBetween: slider_spaceBetween,
         },

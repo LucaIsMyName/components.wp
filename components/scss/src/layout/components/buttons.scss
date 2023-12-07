@@ -2,7 +2,6 @@
 @name: buttons
 */
 
-
 .block.buttons {
     --buttons--shadow-color: var(--shadow-xs);
     --buttons--font-weight: var(--font-weight-semi);
@@ -25,6 +24,8 @@
         align-items: center;
         font-weight: var(--buttons--font-weight);
         border-radius: var(--buttons--border-radius);
+        font-family: var(--buttons--font-family);
+        font-weight: var(--buttons--font-weight);
 
         &:is(:hover, :focus) {
             opacity: 0.9;

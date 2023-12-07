@@ -39,7 +39,7 @@ $fluid-typography--multiply-end: map-get($map: $fluid-typography--multipliers, $
         --header--color: var(--color-text);
         --header--opacity: 0.85;
         --header--blur: var(--blur-lg);
-        --header--border-color: var(--color-background-dark);
+        --header--border-color: var(--color-text, var(--color-background-dark));
         --header--color-before-el: var(--color-text-transparent);
         /*Footer*/
         --footer--background-color: var(--color-background);

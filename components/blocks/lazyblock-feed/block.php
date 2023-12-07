@@ -12,8 +12,8 @@
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>);
+    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
+    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Divider */
     --feed--align: <?= $attributes['feed-align'] ?>; /* 'start', 'center' or 'end' */
     --feed--color:var(--color-<?= $attributes['feed-color'] ?>); 
@@ -36,7 +36,25 @@
                     <section class="[ content ]">
                         <?php if ($attributes['enable-img']): ?>
                             <figure class="[ image ]">
-                                <img width="96px" height="96px" src="<?= esc_url($item['image']['url']) ?>" />
+                                <?php
+                                // Extract the relative path from the full URL
+                                $upload_dir = wp_upload_dir();
+                                $relative_path = str_replace($upload_dir['baseurl'], '', $item['image']['url']);
+
+                                // Check if the image is an SVG
+                                if (pathinfo($item['image']['url'], PATHINFO_EXTENSION) === 'svg') {
+                                    // Construct the full path to the SVG file
+                                    $svg_path = $upload_dir['basedir'] . $relative_path;
+                                    // Read SVG file content and echo it
+                                    echo file_get_contents($svg_path);
+                                } else {
+                                    // Handle other image formats as before
+                                    ?>
+                                    <img width="32px" height="32px" alt="<?= $item['image']['alt']; ?>"
+                                        src="<?= $item['image']['url']; ?>" />
+                                    <?php
+                                }
+                                ?>
                             </figure>
                         <?php endif; ?>
                         <section class="[ text ]" data-wysiwyg <?php if ($attributes['enable-onload']): ?>data-aos-duration="<?= $aosDuration ?>" <?php endif; ?>>

@@ -1,3 +1,7 @@
+/*
+@global: preflight
+*/
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -31,6 +35,13 @@
     font-size: var(--font-size-fluid-sm);
     overflow-x: hidden;
     font-family: var(--font-family-sans);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
+}
+
+:where(body) * {
+    transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
 }
 
 /**
@@ -127,6 +138,7 @@
         outline: none;
     }
 }
+
 /**
    * Add the correct font size in all browsers.
    */
