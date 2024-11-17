@@ -1,3 +1,9 @@
+var rellaxBreakpoints = [768, 1240, 1920];
+var rellaxSpeed_slow = 1;
+var rellaxSpeed_medium = 2;
+var rellaxSpeed_fast = 3;
+
+
 var rellaxSlow = new Rellax(".parallax-slow", {
   speed: 1,
   center: false,
@@ -5,7 +11,7 @@ var rellaxSlow = new Rellax(".parallax-slow", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxMedium = new Rellax(".parallax-medium", {
@@ -15,7 +21,7 @@ var rellaxMedium = new Rellax(".parallax-medium", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxFast = new Rellax(".parallax-fast", {
@@ -25,7 +31,7 @@ var rellaxFast = new Rellax(".parallax-fast", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxReverseSlow = new Rellax(".parallax-reverse-slow", {
@@ -35,7 +41,7 @@ var rellaxReverseSlow = new Rellax(".parallax-reverse-slow", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxReverseMedium = new Rellax(".parallax-reverse-medium", {
@@ -45,7 +51,7 @@ var rellaxReverseMedium = new Rellax(".parallax-reverse-medium", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxReverseFast = new Rellax(".parallax-reverse-fast", {
@@ -55,7 +61,7 @@ var rellaxReverseFast = new Rellax(".parallax-reverse-fast", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxHorizontalSlow = new Rellax(".parallax-horizontal-slow", {
@@ -65,7 +71,7 @@ var rellaxHorizontalSlow = new Rellax(".parallax-horizontal-slow", {
   round: false,
   vertical: false,
   horizontal: true,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxHorizontalMedium = new Rellax(".parallax-horizontal-medium", {
@@ -75,7 +81,7 @@ var rellaxHorizontalMedium = new Rellax(".parallax-horizontal-medium", {
   round: false,
   vertical: false,
   horizontal: true,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxHorizontalFast = new Rellax(".parallax-horizontal-fast", {
@@ -85,7 +91,7 @@ var rellaxHorizontalFast = new Rellax(".parallax-horizontal-fast", {
   round: false,
   vertical: false,
   horizontal: true,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 
@@ -97,7 +103,7 @@ var rellaxSlow = new Rellax(".parallax-center-slow", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxMedium = new Rellax(".parallax-center-medium", {
@@ -107,7 +113,7 @@ var rellaxMedium = new Rellax(".parallax-center-medium", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxFast = new Rellax(".parallax-center-fast", {
@@ -117,7 +123,7 @@ var rellaxFast = new Rellax(".parallax-center-fast", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxReverseSlow = new Rellax(".parallax-center-reverse-slow", {
@@ -127,7 +133,7 @@ var rellaxReverseSlow = new Rellax(".parallax-center-reverse-slow", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxReverseMedium = new Rellax(".parallax-center-reverse-medium", {
@@ -137,7 +143,7 @@ var rellaxReverseMedium = new Rellax(".parallax-center-reverse-medium", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxReverseFast = new Rellax(".parallax-center-reverse-fast", {
@@ -147,8 +153,9 @@ var rellaxReverseFast = new Rellax(".parallax-center-reverse-fast", {
   round: false,
   vertical: true,
   horizontal: false,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
+
 
 var rellaxHorizontalSlow = new Rellax(".parallax-center-horizontal-slow", {
   speed: 1,
@@ -157,7 +164,7 @@ var rellaxHorizontalSlow = new Rellax(".parallax-center-horizontal-slow", {
   round: false,
   vertical: false,
   horizontal: true,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxHorizontalMedium = new Rellax(".parallax-center-horizontal-medium", {
@@ -167,7 +174,7 @@ var rellaxHorizontalMedium = new Rellax(".parallax-center-horizontal-medium", {
   round: false,
   vertical: false,
   horizontal: true,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
 });
 
 var rellaxHorizontalFast = new Rellax(".parallax-center-horizontal-fast", {
@@ -177,5 +184,36 @@ var rellaxHorizontalFast = new Rellax(".parallax-center-horizontal-fast", {
   round: false,
   vertical: false,
   horizontal: true,
-  breakpoints: [768, 1240, 1920],
+  breakpoints: rellaxBreakpoints,
+});
+
+
+var rellaxHorizontalSlow = new Rellax(".parallax-horizontal-slow", {
+  speed: 1,
+  center: false,
+  wrapper: null,
+  round: false,
+  vertical: false,
+  horizontal: true,
+  breakpoints: rellaxBreakpoints,
+});
+
+var rellaxHorizontalMedium = new Rellax(".parallax-horizontal-medium", {
+  speed: 2,
+  center: false,
+  wrapper: null,
+  round: false,
+  vertical: false,
+  horizontal: true,
+  breakpoints: rellaxBreakpoints,
+});
+
+var rellaxHorizontalFast = new Rellax(".parallax-horizontal-fast", {
+  speed: 3,
+  center: false,
+  wrapper: null,
+  round: false,
+  vertical: false,
+  horizontal: true,
+  breakpoints: rellaxBreakpoints,
 });

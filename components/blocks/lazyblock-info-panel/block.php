@@ -10,8 +10,6 @@
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Info Panel */
     --info-panel--border-color:var(--color-<?= $attributes['panel-border-color'] ?>);
     --info-panel--background-color:var(--color-<?= $attributes['panel-background-color'] ?>);

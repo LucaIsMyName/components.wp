@@ -1,4 +1,4 @@
-<div class="[ entry-meta ] sr">
+<div class="[ entry-meta ]">
     <span class="" <?php if (is_single()) {
                         echo ' itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">';
                     } else {

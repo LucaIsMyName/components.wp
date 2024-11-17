@@ -78,6 +78,13 @@
             flex-shrink: 0;
             flex-grow: 0;
             height: auto;
+
+            img,
+            svg {
+                width: 100%;
+                height: auto;
+            }
+
             // margin-bottom: var(--spacing-sm);
         }
     }

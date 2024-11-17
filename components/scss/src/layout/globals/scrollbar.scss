@@ -2,16 +2,16 @@
 @global: scrollbar
 */
 
-::-webkit-scrollbar {
-    width: var(--spacing-xxs);
-    height: var(--spacing-xxs);
-}
+// ::-webkit-scrollbar {
+//     width: var(--spacing-xxs);
+//     height: var(--spacing-xxs);
+// }
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--color-text-transparent);
-}
+// ::-webkit-scrollbar-thumb {
+//     background-color: var(--color-text-transparent);
+// }
 
-::-webkit-scrollbar-track {
-    background-color: rgba(10, 10, 10, 0.075);
+// ::-webkit-scrollbar-track {
+//     background-color: rgba(10, 10, 10, 0.075);
 
-}
+// }

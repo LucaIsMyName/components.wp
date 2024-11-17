@@ -1,21 +1,16 @@
 # theme js
 
-## html api's
-
-### `viewport.js`
+# `viewport.js`
 
 ```html
 <body>
     <section data-viewport>
         Element will get viewport=true if top or bottom are inside the offsets default (0)
     </section>
-    <section data-viewport data-viewport-offset="100px">
-        Element will get viewport=true if top or bottom are inside the offsets
-    </section>
 </body>
 ```
 
-### `accordion.js`
+# `accordion.js`
 
 ```html
 <div data-accordion-group>
@@ -30,7 +25,7 @@
 </div>
 ```
 
-### `modal.js`
+# `modal.js`
 
 ```html
 <button data-modal-toggle="myModal">Toggle Modal</button>
@@ -41,7 +36,7 @@
 </section>
 
 ```
-### `tabs.js`
+# `tabs.js`
 
 <section data-tabs>
     <nav>
@@ -58,7 +53,7 @@
     </section>
 </section>
 
-### `tooltip.js`
+# `tooltip.js`
 ```html
 <section data-tooltip>
     <p>Lorem ipsum <span data-tooltip="dolor">dolor</span> ...</p>
@@ -66,56 +61,158 @@
 <div data-tooltip-content="dolor">My Tooltip Content for the Word 'dolor'</div>
 ```
 
-### `scroll-state.js`
+# `scoll-state.js`
+
+`scroll-state.js` is a js library that provides a simple html api for checking of the useragent is currently scrolling up, down, is on top, bottom, how many pixels from the top, and if the user has scrolled once or if the user is currently scrolling.
+
+## setup
+
 ```html
-<header data-scroll-state>
-    My Header ..
-</header>
+<body data-scroll-state>
+    ... 
+    <script src="scroll-state.js">    
+</body>
 ```
 
-### `splash-screen.js`
+## api
+
+once the scroll-state attribute is set, the js will insert the following attributes onto the element:
+- `data-scroll-state="{string}"`
+- `data-scroll-state-scrolled="{int}"`
+- `data-scroll-state-scrolled-relative="{float}"`
+- `data-scroll-state-has-scroll="{bool}"`
+- `data-scroll-state-is-scrolling="{bool}"`
+- `data-scroll-state-document-height="{int}"`
+
+the rendered DOM will look something like this:
+
+```html
+<body data-scroll-state="top" data-scroll-state-scrolled="0" data-scroll-state-scrolled-relative="0%"  data-scroll-state-has-scrolled="false"  data-scroll-state-is-scrolling="false" data-scroll-state-document-height="12305">
+    ... 
+    <script src="scroll-state.js">    
+</body>
+```
+
+# `splash-screen.js`
 ```html
 <div data-splash-screen>
     Loading ...
 </div>
 ```
+# `accessibility.js`
 
-### `audioplayer.js`
+## installation
+
+Place this Script Tag in the <head> or under the closing <body> tag
+
+```
+<script src="path/to/acessibility.js" defer></script>
+```
+
+accssibility.js now scans for the following things and will report:
+- any image or svg with a missing or empty alt attribute
+- any <button> element without or with an empty title attribute
+- any font that has a computed size under 12px
+
+# `audioplayer.js`
+
+the idea to provide a simple yet powerful html-attribute-api to create a html5-friendly audioplayer that's styleable as any other DOM element and providing full html5-audio functionality. audioplayer.js itself provides no styling or extra functionality, it only manages play/pausing/muting-functionality to the elements.
+
+there can be as many audioplayer on a single html page as you like, they all will work independently from each other.
+
+## compatability
+
+all common web-audio formats are supported: `.mp3`, `.wav`, `.webm`
+
+## creating an `audioplayer`
+
+to signify that an audioplayer is used you have to create a container/element with the `data-audioplayer` attribute, all other elements of the player must be inside this element.
+
+`audioplayer.js` consists of three main parts: `controls`, `playlist` and `currently-playing`
+
+- `data-audioplayer-controls`: hosts all controls element like, play, pause, mute inside. Have to be wrapped inside `data-audioplayer-controls` attribute.
+- `data-audioplayer-playlist`: hosts all information about each track like: Name, Artist or Cover Image. Have to wrapped inside `data-audioplayer-playlist` attribute
+- `data-audioplayer-current`: a set of data-attributes that dynamically render informations about the currently playing track. They only have to be wrapped inside `data-audioplayer` and can be playced anywhere inside.
+
+### controls
+
+all controls must be wrapped insde a `data-audioplayer-controls` element. 
+
+all controls are optional, so if no matching html elemt is found the player skips the functionaliyt and uses the default setting in the JS.
+
+the following `data-audioplayer-control="{control-name}"` attributes are available:
+- `play-pause`
+- `prev`
+- `next`
+- `mute-unmute`
+- `repeat-track`
+- `repeat-playlist`
+
+### currently playing
+
+use data-audioplayer-current-{name} to dynamically show informations about the currently playing track.
+the following values are available:
+- `data-audioplayer-current="title"`
+- `data-audioplayer-current="title"`
+- `data-audioplayer-current="cover"`
+
+### creating the playlist
+
+playlist have to wrapped inside a `data-audioplayer-playlist` element.
+
+each track should be wrapped inside an element that has `data-audioplayer-track` and the `data-audioplayer-track-url="my/path/to/the/track.mp3"`. inside this element you can use the following data attributes to signify infiormtaions for the audioplayer:
+- `data-audioplayer-track="title"`
+- `data-audioplayer-track="artist"`
+- `data-audioplayer-track="cover"` (use on `img` elements)
+
+## Example Code
+ 
 ```html
-<div data-audioplayer>
-    <section class="currently-playing">
-        <img data-audioplayer-current-cover src="path/to/placeholder.jpg" />
-        <p data-audioplayer-current-track>
-             <!-- String get's dynamically inserted via JS on the basis of the currently playing snd in the playlist -->
-        </p>
-        <p data-audioplayer-current-artist>
-              <!-- String get's dynamically inserted via JS on the basis of the currently playing snd in the playlist -->
-        </p>
+    <!-- Initialize the audioplayer -->
+    <section data-audioplayer>
+        <div>
+            <p data-audioplayer-current="title">
+                <!-- Track will be inserted here via JS, default: first in list -->
+            </p>
+            <p data-audioplayer-current="artist">
+                <!-- Artist will be inserted here via JS, default: first in list -->
+            </p>
+            <figure>
+                <img data-audioplayer-current="cover">
+            </figure>
+        </div>
+        <!-- Controls Wrapper -->
+        <div data-audioplayer-controls>
+            <input type="range" data-audioplayer-control="progress-bar">
+            <div>
+                <button data-audioplayer-control="prev">Prev</button>
+                <button data-audioplayer-control="play-pause">Play/Pause</button>
+                <button data-audioplayer-control="next">Next</button>
+            </div>
+            <div>
+                <button data-audioplayer-control="repeat-track">Repeat Track</button>
+                <button data-audioplayer-control="mute-unmute">Mute/Unmute</button>
+                <button data-audioplayer-control="repeat-playlist">Repeat Playlist</button>
+            </div>
+            <input type="range" data-audioplayer-control="volume">
+        </div>
+        <section data-audioplayer-playlist>
+            <button data-audioplayer-track data-audioplayer-track-url="song-1.mp3">
+                <p data-audioplayer-track="title">Track 1</p>
+                <p data-audioplayer-track="artist">Artist Name 1</p>
+                <img src="https://placehold.co/600" data-audioplayer-track="cover">
+            </button>
+            <button data-audioplayer-track data-audioplayer-track-url="song-2.mp3">
+                <p data-audioplayer-track="title">Track 2</p>
+                <p data-audioplayer-track="artist">Artist Name 2</p>
+                <img src="https://placehold.co/400" data-audioplayer-track="cover">
+            </button>
+             <button data-audioplayer-track data-audioplayer-track-url="song-3.mp3">
+                <p data-audioplayer-track="title">Track 3</p>
+                <p data-audioplayer-track="artist">Artist Name 3</p>
+                <img src="https://placehold.co/500" data-audioplayer-track="cover">
+            </button>
+        </section>
     </section>
-    <section data-audioplayer-controls class="controls">
-        <p data-audioplayer-repeat-playlist>Repeat Playlist</p>
-        <p data-audioplayer-prev>Previous Track</p>
-        <p data-audioplayer-play-pause>Play/Pause</p>
-        <p data-audioplayer-next>Next Track</p>
-        <p data-audioplayer-mute-unmute>Mute/Unmute Track</p>
-    </section>
-    <section class="playlist">
-        <ul data-audioplayer-playlist>
-            <li data-audioplayer-track data-audioplayer-track-url="path/to/track-1.mp3">
-                <img data-audioplayer-track-image src="path/to/cover-1.jpg"/>
-                <p data-audioplayer-track-title>Track 1</p>
-                <p data-audioplayer-track-artist>Artist 1</p>
-            </li>
-            <li data-audioplayer-track data-audioplayer-track-url="path/to/track-2.webm">
-                <img data-audioplayer-track-image src="path/to/cover-2.jpg"/>
-                <p data-audioplayer-track-title>Track 2</p>
-                <p data-audioplayer-track-artist>Artist 2</p>
-            </li>
-            <li data-audioplayer-track data-audioplayer-track-url="path/to/track-3.wav">
-                ...
-            </li>
-        </ul>
-    </section>
-   ...
-</div>
+    <script src="path/to/audioplayer.js">
 ```

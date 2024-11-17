@@ -1,120 +1,165 @@
 /**
  * @name tooltip.js
- * @version 0.1
+ * @version 1.0
  * @author luca mack
- * @todo tooltip placemement (position in relation to the word/phrase and to the viewport) 
- * @description any element with [data-tooltip="someId"] that has a corresponding [data-tooltip-content="someId"] element anywhere on the page get shown as tooltip in frontend
+ * @todo 
+ * change to colocation like <span data-tooltip="My Explainer">Word</span>, 
+ * show in center/top default
+ * @description 
+ * any element with [data-tooltip="Content"] attribute get's displayed as 
+ * tooltip on mouseover or focus 
  
 */
 
+(function () {
+    /**
+     * Get the Tooltip Elements and the body
+     */
+    const tooltipElements = document.querySelectorAll('[data-tooltip]');
+    const body = document.querySelector('body');
+    /**
+     * Loop through all [data-tooltip] element on te page
+     * and create the tooltipDiv Element, set the correct styling 
+     * and set functionaly to hide/show them
+     */
+    tooltipElements.forEach((element, index) => {
+        /**
+         * Get and Style the Tooltip Toggle Element itself
+         */
+        const tooltipContent = element.getAttribute('data-tooltip');
+        const tooltipId = 'tooltip-' + `${Math.floor(Math.random() * 9999)}` + '-' + index;
+        element.style.border = tooltip.element.border || '';
+        element.style.borderBottom = tooltip.element.textDecoration || '2px dotted blue';
+        element.style.backgroundColor = tooltip.element.backgroundColor || 'transparent';
+        element.style.color = tooltip.element.color || 'inherit';
+        element.setAttribute('tabindex', '1');
+        element.setAttribute('aria-describedby', tooltipId);
+        /**
+        * Create, Append and Style the Tooltip Content Element
+        */
+        const tooltipDiv = document.createElement('div');
+        tooltipDiv.setAttribute('data-tooltip-id', tooltipId);
+        tooltipDiv.setAttribute('data-tooltip-content', '');
+        tooltipDiv.setAttribute('id', tooltipId);
+        tooltipDiv.setAttribute('role', 'tooltip');
+        tooltipDiv.setAttribute('data-tooltip-active', 'false');
+        tooltipDiv.setAttribute('aria-hidden', 'true');
+        tooltipDiv.style.display = 'none';
+        tooltipDiv.style.zIndex = '-1';
+        /**
+         * Get the Attributes -> Object Values -> Default values 
+         * for the styling of the tooltip 
+         */
+        tooltipDiv.style.position = element.getAttribute('data-tooltip-position') || tooltip.content.position || 'absolute'; // Switch between 'aboslute' and 'fixed'
+        tooltipDiv.style.border = element.getAttribute('data-tooltip-border') || tooltip.content.border || '1px solid black';
+        tooltipDiv.style.fontSize = element.getAttribute('data-tooltip-font-size') || tooltip.content.fontSize || '0.8em';
+        tooltipDiv.style.fontFamily = element.getAttribute('data-tooltip-font-family') || tooltip.content.fontFamily || 'inherit';
+        tooltipDiv.style.lineHeight = element.getAttribute('data-tooltip-line-height') || tooltip.content.lineHeight || '1.2';
+        tooltipDiv.style.background = element.getAttribute('data-tooltip-background') || tooltip.content.background || 'white';
+        tooltipDiv.style.padding = element.getAttribute('data-tooltip-padding') || tooltip.content.padding || '5px';
+        tooltipDiv.style.borderRadius = element.getAttribute('data-tooltip-border-radius') || tooltip.content.borderRadius || '5px';
+        tooltipDiv.style.boxShadow = element.getAttribute('data-tooltip-box-shadow') || tooltip.content.boxShadow || '0 4px 8px rgba(0, 0, 0, 0.1)';
+        tooltipDiv.style.maxWidth = element.getAttribute('data-tooltip-max-width') || tooltip.content.maxWidth || 'auto';
+        tooltipDiv.style.minWidth = element.getAttribute('data-tooltip-min-width') || tooltip.content.minWidth || 'auto';
+        tooltipDiv.style.maxHeight = element.getAttribute('data-tooltip-max-height') || tooltip.content.maxHeight || 'auto';
+        tooltipDiv.style.opacity = parseInt(element.getAttribute('data-tooltip-opacity')) || parseInt(tooltip.content.opacity) || 1;
+        // console.log(tooltipDiv.style.position, tooltipDiv.style.padding, tooltipDiv.style.fontFamily, tooltipDiv.style.opacity);
+        /**
+         * set the [data-tooltip] vaue to the 
+         * textContent of the created tooltipDiv
+         */
+        tooltipDiv.textContent = tooltipContent;
+        body.appendChild(tooltipDiv);
+        /**
+         * Insert the ID in the 
+         * Tooltip Toggle Element 
+         */
+        element.setAttribute('data-tooltip-id', tooltipId);
+        element.setAttribute('data-tooltip', '');
+        /**
+         * @name calculateTooltipPosition
+         * calculate the position of the tooltipDiv in 
+         * relation to the word it should explain
+         */
+        
+        function calculateTooltipPosition() {
+            const rect = element.getBoundingClientRect();
+            const tooltipOffsetX = parseInt(element.getAttribute('data-tooltip-offset-x')) || parseInt(tooltip.offsetX) || 0;
+            const tooltipOffsetY = parseInt(element.getAttribute('data-tooltip-offset-y')) || parseInt(tooltip.offsetY) || 0;
+            const tooltipAnchor = element.getAttribute('data-tooltip-anchor') || tooltip.anchor || 'top';
 
-// Get all elements with data-tooltip attribute
-const tooltipElements = document.querySelectorAll('[data-tooltip]');
+            let leftPosition = rect.left + window.scrollX + element.offsetWidth / 2 - tooltipDiv.offsetWidth / 2 - tooltipOffsetX;
+            let topPosition;
 
-/**
- * @name calculateAvailableSpace
- * @param {*} targetRect 
- * @param {*} tooltipWidth 
- * @param {*} tooltipHeight 
- * @returns 
- */
-// Create a function to calculate available space
-function calculateAvailableSpace(targetRect, tooltipWidth, tooltipHeight) {
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
+            if (tooltipAnchor === 'bottom') {
+                topPosition = rect.bottom + window.scrollY + tooltipOffsetY;
+            } else {
+                topPosition = rect.top + window.scrollY - tooltipDiv.offsetHeight - tooltipOffsetY;
+            }
 
-    const space = {
-        top: targetRect.top - tooltipHeight,
-        bottom: viewportHeight - (targetRect.bottom + tooltipHeight),
-        left: targetRect.left - tooltipWidth,
-        right: viewportWidth - (targetRect.right + tooltipWidth),
-    };
+            /* 
+             * Check if the tooltip is going out of the viewport and adjust its position
+             */
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
 
-    return space;
-}
+            /* 
+             * Adjust horizontal position 
+             */
+            if (leftPosition < 0) {
+                leftPosition = 0; // Align left edge with viewport
+            } else if (leftPosition + tooltipDiv.offsetWidth > viewportWidth) {
+                leftPosition = viewportWidth - tooltipDiv.offsetWidth; // Align right edge with viewport
+            }
 
-// Create a function to show the tooltip
-function showTooltip(event) {
-    const target = event.target;
-    const tooltipId = target.getAttribute('data-tooltip');
-    const tooltipContent = document.querySelector(`[data-tooltip-content="${tooltipId}"]`);
+            // Adjust vertical position
+            if (topPosition < 0) {
+                topPosition = rect.bottom + window.scrollY + tooltipOffsetY; // Move to below the element
+            } else if (topPosition + tooltipDiv.offsetHeight > viewportHeight) {
+                topPosition = rect.top + window.scrollY - tooltipDiv.offsetHeight - tooltipOffsetY; // Move to above the element
+            }
 
-    // Check if the tooltip content exists
-    if (tooltipContent) {
-        const targetRect = target.getBoundingClientRect();
-        const targetTop = targetRect.top + window.scrollY;
-        const targetLeft = targetRect.left + window.scrollX;
-        const tooltipMaxWidth = 320;
-        const tooltipMinWidth = 180;
-
-        let left, top, tooltipWidth;
-
-        // tooltipContent.style.position = 'absolute';
-        // tooltipContent.style.background = 'var(--color-text)';
-        // tooltipContent.style.color = 'var(--color-background)';
-        // tooltipContent.style.zIndex = '10000';
-
-        // Try placing the tooltip starting from the horizontal center on top
-        top = targetTop - tooltipContent.offsetHeight;
-        left = targetLeft + targetRect.width / 2 - tooltipContent.offsetWidth / 2;
-        tooltipWidth = Math.min(tooltipMaxWidth, Math.max(tooltipMinWidth, tooltipContent.offsetWidth));
-
-        // Check available space and adjust tooltip position if needed
-        const availableSpace = calculateAvailableSpace(targetRect, tooltipWidth, tooltipContent.offsetHeight);
-
-        if (top < 0 || availableSpace.top < 0) {
-            // Not enough space on top, try bottom
-            top = targetTop + targetRect.height;
+            // Apply the calculated positions
+            tooltipDiv.style.left = leftPosition + 'px';
+            tooltipDiv.style.top = topPosition + 'px';
         }
-        if (top + tooltipContent.offsetHeight > window.innerHeight || availableSpace.bottom < 0) {
-            // Not enough space on bottom, try right
-            top = targetTop + targetRect.height / 2 - tooltipContent.offsetHeight / 2;
-            left = targetLeft + targetRect.width;
-            tooltipWidth = Math.min(tooltipMaxWidth, Math.max(tooltipMinWidth, tooltipContent.offsetWidth));
+
+        /**
+         * Hide the Tooltip
+         * and set the correct attributes
+         */
+        function hideTooltip() {
+            tooltipDiv.style.display = 'none';
+            tooltipDiv.style.zIndex = '-1';
+            tooltipDiv.setAttribute('data-tooltip-active', 'false');
+            tooltipDiv.setAttribute('aria-hidden', 'true');
         }
-        if (left + tooltipContent.offsetWidth > window.innerWidth || availableSpace.right < 0) {
-            // Not enough space on right, try left
-            top = targetTop + targetRect.height / 2 - tooltipContent.offsetHeight / 2;
-            left = targetLeft - tooltipContent.offsetWidth;
-            tooltipWidth = Math.min(tooltipMaxWidth, Math.max(tooltipMinWidth, tooltipContent.offsetWidth));
+        /**
+         * Show the Tooltip
+         * and set the correct attributes
+         */
+        function showTooltip() {
+            tooltipDiv.style.display = 'block';
+            tooltipDiv.style.zIndex = tooltip.content.zIndex || '9999';
+            tooltipDiv.setAttribute('data-tooltip-active', 'true');
+            tooltipDiv.setAttribute('aria-hidden', 'false');
+            calculateTooltipPosition();
         }
 
-        // Set tooltip position and width, then display it
-        tooltipContent.style.left = left + 'px';
-        tooltipContent.style.top = top + 'px';
-        tooltipContent.style.width = tooltipWidth + 'px';
-        tooltipContent.style.display = 'block';
-        tooltipContent.style.zIndex = '100000';
-
-    }
-}
-
-// Create a function to hide the tooltip
-function hideTooltip(event) {
-    const tooltipId = event.target.getAttribute('data-tooltip');
-    const tooltipContent = document.querySelector(`[data-tooltip-content="${tooltipId}"]`);
-    if (tooltipContent) {
-        tooltipContent.style.display = 'none';
-        tooltipContent.style.zIndex = '-1';
-    }
-}
-
-// Add event listeners to show and hide tooltips
-tooltipElements.forEach((element) => {
-    element.addEventListener('mouseenter', showTooltip);
-    element.addEventListener('focus', showTooltip);
-    element.addEventListener('mouseleave', hideTooltip);
-    element.addEventListener('blur', hideTooltip);
-});
-
-// Add event listener for window resize
-window.addEventListener('resize', () => {
-    // Hide tooltips on window resize
-    tooltipElements.forEach((element) => {
-        const tooltipId = element.getAttribute('data-tooltip');
-        const tooltipContent = document.querySelector(`[data-tooltip-content="${tooltipId}"]`);
-        if (tooltipContent) {
-            tooltipContent.style.display = 'none';
-        }
+        /** 
+         * Add EventListeners for show/hide
+         */
+        element.addEventListener('mouseout', () => {
+            hideTooltip();
+        });
+        element.addEventListener('blur', () => {
+            hideTooltip();
+        });
+        element.addEventListener('focus', () => {
+            showTooltip();
+        });
+        element.addEventListener('mouseover', () => {
+            showTooltip();
+        });
     });
-});
+})();

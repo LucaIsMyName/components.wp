@@ -12,6 +12,10 @@
         gap: var(--buttons--spacing);
     }
 
+    .text {
+        transform: translateY(-0.1em);
+    }
+
     a {
         text-decoration: none;
     }
@@ -27,8 +31,33 @@
         font-family: var(--buttons--font-family);
         font-weight: var(--buttons--font-weight);
 
-        &:is(:hover, :focus) {
-            opacity: 0.9;
+        &:is(:hover) {
+            outline: var(--px) solid rgba(0, 0, 0, 0.25);
+            outline-offset: var(--px);
+
+            [color-theme="dark"] & {
+                outline: var(--px) solid rgba(255, 255, 255, 0.25);
+
+            }
+
+            svg {
+                transition: all 0.3s ease;
+                transform: scale(1.1);
+            }
+
+
+            [color-theme="dark"] & {
+                outline: var(--px) solid rgba(255, 255, 255, 0.25);
+            }
+        }
+
+        &:is(:focus) {
+            outline: var(--px) solid rgba(0, 0, 0, 0.25);
+            outline-offset: var(--px);
+
+            [color-theme="dark"] & {
+                outline: var(--px) solid rgba(255, 255, 255, 0.25);
+            }
         }
 
         &:has(:not(.text) + .image) {
@@ -71,6 +100,16 @@
 
         &.default {
             @include button-color('text', 'background', 'text');
+            border-width: var(--px);
+        }
+
+        &.transparent {
+            @include button-color('text', 'transparent', 'text');
+            border-width: var(--px);
+        }
+
+        &.transparent-inverted {
+            @include button-color('background', 'transparent', 'background');
             border-width: var(--px);
         }
 

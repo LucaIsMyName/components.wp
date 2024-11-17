@@ -13,11 +13,7 @@ $tabContainerId = rand(10000, 99999);
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
-    /* Slider */
-    --tabs--layout:<?= $attributes['tabs-layout'] ?>; /* Row, Row-Reverse, Column, Column Reverse */
-    --tabs--align:<?= $attributes['tabs-align'] ?>; /* Flex Start, Center, Flex End, Space Between, Space Around, Spsace Evenly */
+    /* Tabs */
     --tabs--size:var(--font-size-fluid-<?= $attributes['tabs-size'] ?>);
     --tabs--background-color:var(--color-<?= $attributes['tabs-background-color'] ?>);
     --tabs--background-color-active:var(--color-<?= $attributes['tabs-background-color'] ?>);
@@ -28,7 +24,7 @@ $tabContainerId = rand(10000, 99999);
     <div class="[ container ]">
 
         <section data-tabs data-tabs-id="<?= $tabContainerId ?>" class="[ tabs-container ]">
-            <div class="[ tabs-header ]" data-simplebar>
+            <div class="[ tabs-header ]">
                 <?php $tabTitleId = 1; ?>
                 <?php foreach ($attributes['tabs'] as $tabTitle): ?>
                     <button class="[ tab ]" data-tabs-toggle="<?= $tabContainerId ?>-<?= $tabTitleId; ?>" data-tabs-toggle-active>

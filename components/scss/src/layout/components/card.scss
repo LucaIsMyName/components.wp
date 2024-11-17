@@ -10,6 +10,17 @@
         border-style: solid;
         background-color: var(--card--background-color);
         color: var(--card--color);
-        border-radius: var(--card--border-radius)
+        border-radius: var(--card--border-radius);
+        position: relative;
+
+        &:has(>a) {
+            padding: 0;
+        }
+
+        >a {
+            display: block;
+            padding: var(--card--spacing);
+            text-decoration: none;
+        }
     }
 }

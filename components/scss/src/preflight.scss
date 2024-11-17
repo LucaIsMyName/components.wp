@@ -28,6 +28,9 @@
 /**
    * Remove the margin in all browsers.
    */
+html {
+    background-color: var(--color-background);
+}
 
 :where(body) {
     background-color: var(--color-background);
@@ -37,11 +40,11 @@
     font-family: var(--font-family-sans);
     color: var(--color-text);
     background-color: var(--color-background);
-    transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
+    // transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
 }
 
 :where(body) * {
-    transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
+    // transition: color var(--transition-medium), background-color var(--transition-medium), border-color var(--transition-medium), stroke var(--transition-medium), fill var(--transition-medium);
 }
 
 /**
@@ -132,6 +135,15 @@
     /* 2 */
 }
 
+:focus {
+    outline: var(--px) solid rgba(0, 0, 0, 0.5);
+
+    [color-theme="dark"] & {
+        outline-color: rgba(255, 255, 255, 0.5);
+    }
+
+    outline-offset: var(--px);
+}
 
 [contenteditable] {
     &:focus {
@@ -435,4 +447,260 @@
     .sr,
     .sr-only) {
     @include screen-reader();
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+    text-wrap: balance
+}
+
+:where(p, small) {
+    text-wrap: pretty;
+}
+
+// NInja forms
+.nf-form-content {
+    padding: 0 !important;
+    margin: 0 auto;
+
+    .listradio-container {
+        :where([data-wysiwyg]) ul li::before {
+            display: none !important;
+            content: none !important;
+        }
+    }
+}
+
+.nf-form-content .list-select-wrap .nf-field-element>div:focus,
+.nf-form-content input:not([type=button]):focus,
+.nf-form-content textarea:focus {
+    background: transparent !important;
+    border-color: var(--color-background-dark) !important;
+    color: var(--color-text-transparent) !important;
+    outline: var(--px) solid var(--color-text-transparent) !important;
+    outline-offset: var(--px) !important;
+    transition: all .5s !important;
+}
+
+.nf-form-content .list-select-wrap .nf-field-element>div,
+.nf-form-content input:not([type=button]),
+.nf-form-content textarea {
+    background: var(--color-background) !important;
+    border-radius: var(--spacing-em-xs) !important;
+    border: var(--px) solid var(--color-text-transparent) !important;
+    box-shadow: none !important;
+    color: var(--color-text-light) !important;
+    transition: all .5s !important;
+    width: 100%;
+    max-height: 50ch;
+
+    &:hover {
+        outline: var(--px) solid var(--color-text-transparent);
+    }
+
+    &:focus {
+        background: var(--color-background-transparent) !important;
+        border-color: var(--color-text) !important;
+        outline: var(--px) solid var(--color-text-transparent);
+        outline-offset: var(--px) !important;
+    }
+}
+
+.nf-form-fields-required {
+    margin-block-end: var(--spacing-em-sm);
+}
+
+.nf-error.field-wrap .nf-field-element:after {
+    background: var(--color-red) !important;
+    color: var(--color-background) !important;
+}
+
+.nf-error .nf-error-msg {
+    color: var(--color-red) !important;
+    font-size: var(--font-size-xs);
+    margin-top: var(--spacing-em-sm);
+}
+
+.nf-after-field .nf-error-msg {
+    margin-right: var(--spacing-xs) !important;
+}
+
+.nf-error-msg,
+.ninja-forms-req-symbol {
+    color: var(--color-red) !important;
+}
+
+.nf-form-content .nf-error .ninja-forms-field {
+    border-color: var(--color-red) !important;
+}
+
+.nf-field-container {
+    margin-bottom: var(--spacing-em-md);
+}
+
+.nf-form-cont {
+    li {
+        &::before {
+            display: none;
+            content: '';
+        }
+    }
+}
+
+// Radio
+.listradio-wrap .nf-field-element label:after {
+    background: var(--color-background) !important;
+    border: 2px solid var(--color-text-transparent) !important;
+    transition: all .5s !important;
+}
+
+.listradio-wrap .nf-field-element label:after {
+    border-radius: 50% !important;
+    content: "" !important;
+    width: 18px !important;
+    height: 18px !important;
+    position: absolute !important;
+    left: -30px !important;
+    bottom: var(--px) !important;
+    top: 0.05em !important;
+    border: var(--px) solid var(--color-text-transparent) !important;
+}
+
+.listradio-wrap .nf-field-element label.nf-checked-label:before {
+    background: var(--color-text) !important;
+}
+
+.listradio-wrap .nf-field-element label:after {
+    background: var(--color-background) !important;
+    border: var(--px) solid var(--color-text-transparent) !important;
+    transition: all .5s !important;
+}
+
+.listradio-wrap .nf-field-element label:after {
+    border-radius: 50% !important;
+    content: "" !important;
+    width: 18px !important;
+    height: 18px !important;
+    position: absolute !important;
+    left: -30px !important;
+    bottom: 1px !important;
+    top: 0.05em !important;
+}
+
+// // CHeck
+
+.checkbox-wrap .nf-field-element label:after,
+.checkbox-wrap .nf-field-label label:after,
+.listcheckbox-wrap .nf-field-element label:after,
+.listcheckbox-wrap .nf-field-label label:after {
+    background: var(--color-background) !important;
+    border-color: var(--color-text-transparent) !important;
+    border-radius: 2px !important;
+    border: var(--px) solid var(--color-text-transparent) !important;
+    transition: all .5s !important;
+}
+
+
+.checkbox-wrap .nf-field-element label.nf-checked-label:before,
+.checkbox-wrap .nf-field-label label.nf-checked-label:before,
+.listcheckbox-wrap .nf-field-element label.nf-checked-label:before,
+.listcheckbox-wrap .nf-field-label label.nf-checked-label:before {
+    color: var(--color-text) !important;
+    opacity: 1;
+    transition: all .5s;
+}
+
+// .listcheckbox-container .nf-field-element label:after {
+//     top: 3px !important;
+//     bottom: auto !important;
+// }
+
+// .checkbox-wrap .nf-field-element label:after,
+// .checkbox-wrap .nf-field-label label:after,
+// .listcheckbox-wrap .nf-field-element label:after,
+// .listcheckbox-wrap .nf-field-label label:after {
+//     border: var(--px) solid !important;
+//     content: "" !important;
+//     width: 18px !important;
+//     height: 18px !important;
+//     position: absolute !important;
+//     left: -28px !important;
+//     bottom: 0 !important;
+// }
+
+.flatpickr-calendar {
+    font-family: var(--font-family-mono);
+    font-weight: 500 !important;
+
+    .flatpickr-monthDropdown-months {
+        font-weight: 700;
+    }
+}
+
+.nf-response-msg {
+    border-radius: var(--spacing-xxs) !important;
+    padding: var(--spacing-em-sm) var(--spacing-em-md) !important;
+    margin-bottom: var(--spacing-em-md) !important;
+}
+
+.nf-form-content {
+
+
+    input[type="submit"] {
+        background: var(--color-background) !important;
+        border: var(--px) solid var(--color-text) !important;
+        color: var(--color-text) !important;
+        font-size: var(--font-size-sm) !important;
+        font-family: var(--font-family-mono) !important;
+        font-weight: 700 !important;
+        padding: var(--spacing-em-sm) var(--spacing-em-md) !important;
+        transition: all .5s !important;
+        height: auto !important;
+        cursor: pointer !important;
+
+        &:hover {
+            background: var(--color-background-dark) !important;
+            border-color: var(--color-text) !important;
+        }
+    }
+}
+
+.nf-form-content select.ninja-forms-field {
+    background-color: var(--color-background) !important;
+    color: var(--color-text-transparent) !important;
+    border: var(--px) solid var(--color-text-transparent) !important;
+    font-family: var(--font-family-mono) !important;
+    font-size: var(--font-size-sm) !important;
+    border-radius: var(--spacing-xxs) !important;
+}
+
+.nf-pass.field-wrap .nf-field-element:after {
+    color: var(--color-blue) !important;
+    font-family: FontAwesome;
+    font-size: 30px;
+    content: "\f058";
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 50px;
+    line-height: 50px;
+    transition: all .5s;
+}
+
+.nf-pass textarea.ninja-forms-field {
+    border-color: inherit !important;
+    transition: all .5s;
+}
+
+.nf-error-msg {
+    color: var(--color-red) !important;
+    font-size: var(--font-size-xs) !important;
+    margin-top: var(--spacing-em-sm) !important;
+}
+
+.nf-form-fields-required {
+    display: none !important;
+}
+
+.nf-error.field-wrap .nf-field-element:after {
+    display: none !important
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ * @name: feed
  */
 
 ?>
@@ -12,8 +12,6 @@
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Divider */
     --feed--align: <?= $attributes['feed-align'] ?>; /* 'start', 'center' or 'end' */
     --feed--color:var(--color-<?= $attributes['feed-color'] ?>); 
@@ -57,7 +55,7 @@
                                 ?>
                             </figure>
                         <?php endif; ?>
-                        <section class="[ text ]" data-wysiwyg <?php if ($attributes['enable-onload']): ?>data-aos-duration="<?= $aosDuration ?>" <?php endif; ?>>
+                        <section class="[ text ]" <?php if ($attributes['enable-onload']): ?>data-aos-duration="<?= $aosDuration ?>" <?php endif; ?>>
                             <?= $item['text'] ?>
                         </section>
                     </section>

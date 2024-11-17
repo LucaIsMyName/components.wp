@@ -10,8 +10,6 @@
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Hero */
     --hero--min-height: <?= $attributes['hero-min-height'] ?>;
     ">
@@ -19,7 +17,7 @@
     <div class="[ container ]">
         <?php if (isset($attributes['background-image']['url'])): ?>
             <div class="[ image ]">
-                <figure title="<?= $attributes['background-image']['description'] ?>">
+                <figure title="<?= $attributes['background-image']['description'] ?>" <?php if($attributes['enable-onload']): ?>data-aos-duration="600" data-aos="fade-up" data-aos-delay="600" data-aos-easing="ease"<?php endif; ?> >
                     <picture>
                         <?php if (isset($attributes['background-image-desktop']['url'])): ?>
                             <source media="(min-width:1240px)"

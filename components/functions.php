@@ -18,6 +18,7 @@ function template_setup()
     register_nav_menus(array('main-menu' => esc_html__('Main Menu', 'components')));
     register_nav_menus(array('footer-menu' => esc_html__('Footer Menu', 'components')));
     register_nav_menus(array('action-menu' => esc_html__('Action Menu', 'components')));
+    register_nav_menus(array('lang-menu' => esc_html__('Language Menu', 'components')));
 }
 
 add_action('wp_enqueue_scripts', 'template_enqueue');
@@ -222,6 +223,7 @@ add_action('init', 'df_disable_comments_admin_bar');
 $lazyblocks = array(
     'blueprint',
     'text',
+    'post-types',
     'block',
     'image',
     'card',
@@ -229,15 +231,27 @@ $lazyblocks = array(
     'hero',
     'slider',
     'heading',
+    'horizontal-scroll-container',
+    'horizontal-scroll-item',
+    'grid-container',
+    'grid-item',
     'table-of-contents',
     'divider',
     'buttons',
     'sidebar',
+    'gallery',
+    'vertical-row',
+    'teaser',
     'info-panel',
     'modal',
+    'link',
     'marquee',
     'feed',
     'accordion',
+    'accordion-group',
+    'accordion-item',
+    'accordion-title',
+    'accordion-content',
     'tabs',
     'audioplayer',
     'columns-two',
@@ -245,6 +259,7 @@ $lazyblocks = array(
     'columns-four',
     'columns-fluid',
     'description-list',
+    'sticky',
 );
 
 foreach ($lazyblocks as $lazyblock) {
@@ -279,15 +294,15 @@ add_filter('upload_mimes', 'cc_mime_types');
 //     return $image[0];
 // }
 
-add_action("init", function () {
-    // TODO: Replace with the actual page ID or title
-    if (!is_page("page-without-cache"))
-        return;
+// add_action("init", function () {
+//     // TODO: Replace with the actual page ID or title
+//     if (!is_page("page-without-cache"))
+//         return;
 
-    header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
-    header("Pragma: no-cache"); // HTTP 1.0.
-    header("Expires: 0"); // Proxies.
-}, 10);
+//     header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+//     header("Pragma: no-cache"); // HTTP 1.0.
+//     header("Expires: 0"); // Proxies.
+// }, 10);
 
 // Add backend styles for Gutenberg.
 add_action('enqueue_block_editor_assets', 'gutenberg_editor_assets');
@@ -317,3 +332,35 @@ function getIcon($icon = "arrow-up")
     var_dump($getIcon);
     return $getIcon;
 }
+
+// CPT's
+
+
+// AJAX Handler
+function load_custom_posts() {
+  $args = array(
+      'post_type' => 'posts',
+      'posts_per_page' => -1,
+      // Add any additional query arguments as needed
+  );
+
+  $posts = new WP_Query($args);
+
+  $response = array();
+
+  if ($posts->have_posts()) {
+      while ($posts->have_posts()) {
+          $posts->the_post();
+          $response[] = array(
+              'title' => get_the_title(),
+              'content' => get_the_content(),
+              // Add any other post data you want to retrieve
+          );
+      }
+      wp_reset_postdata();
+  }
+
+  wp_send_json($response);
+}
+add_action('wp_ajax_load_custom_posts', 'load_custom_posts');
+add_action('wp_ajax_nopriv_load_custom_posts', 'load_custom_posts');

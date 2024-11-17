@@ -28,10 +28,9 @@
                 <section data-wysiwyg class="[ text ]">
                     <?= $attributes['text'] ?>
                 </section>
-
                 <?php if ($attributes['enable-toc']): ?>
-                    <section class="[ table-of-contents ]" data-table-of-contents>
-                        <!-- Render Table of Contents here -->
+                    <section class="toc" data-table-of-contents="[toc-area]"
+                        data-table-of-contents-headlines="h1,h2,h3, h4, h5, h6" data-table-of-contents-link="true">
                     </section>
                 <?php endif; ?>
                 <?php if ($attributes['enable-widgets']): ?>
@@ -45,7 +44,7 @@
             <? endif; ?>
 
         </aside>
-        <article class="[ content ]">
+        <article toc-area class="[ content ]">
             <?= $attributes['inner-blocks'] ?>
         </article>
     </div>

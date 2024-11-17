@@ -12,6 +12,37 @@
             flex-direction: var(--sidebar--direction);
         }
 
+        [data-table-of-contents] {
+            margin-bottom: var(--spacing-md);
+
+            // @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
+            //     padding-bottom: var(--spacing-md);
+            //     border-bottom: var(--px) solid var(--color-background-dark);
+            // }
+
+            ul {
+                li {
+                    margin-bottom: var(--spacing-xs);
+
+                    a {
+                        color: var(--color-text-transparent);
+                        text-decoration: none;
+
+                        &:hover {
+                            color: var(--color-text);
+                        }
+                    }
+                }
+
+                list-style-type: none;
+
+                ul {
+                    border-left: var(--px) solid var(--color-background-dark);
+                    padding-left: var(--spacing-xs);
+                }
+            }
+        }
+
         >.sidebar-container {
             display: block;
             box-sizing: border-box;
@@ -39,16 +70,15 @@
 
             @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
                 flex: 1 1 0%;
-                width:100%;
-                max-width: clamp(calc(var(--sidebar--width-sm) * 0.25), 20vw, calc(var(--sidebar--width-sm) * 0.5));
+                width: 100%;
+                max-width: clamp(calc(var(--sidebar--width-sm) * 0.25), 33vw, calc(var(--sidebar--width-sm) * 0.4));
             }
         }
 
         @media (min-width: map-get($map: $media-queries, $key: 'sm')) {
             >.content {
-                width: calc(100% - clamp(var(--sidebar--width-sm) * 0.25, 20vw, var(--sidebar--width-sm) * 0.5))
-                // flex: 1 1 0%;
-                // max-width: calc(100% - clamp(calc(var(--sidebar--width-sm) * 0.75), 20vw, calc(var(--sidebar--width-sm) * 1.25)));
+                width: calc(100% - clamp(var(--sidebar--width-sm) * 0.25, 33vw, var(--sidebar--width-sm) * 0.4)) // flex: 1 1 0%;
+                    // max-width: calc(100% - clamp(calc(var(--sidebar--width-sm) * 0.75), 20vw, calc(var(--sidebar--width-sm) * 1.25)));
             }
         }
 

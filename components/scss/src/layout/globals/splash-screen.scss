@@ -18,7 +18,7 @@
             font-size: var(--size-1);
             width: var(--size-1);
             height: var(--size-1);
-            background-color: var(--color-brand);
+            background-color: var(--color-text);
             border-radius: var(--border-radius-pill);
             // filter: blur(var(--blur-sm));
             position: relative;
@@ -30,7 +30,7 @@
                 inset: 0;
                 width: var(--size-1);
                 height: var(--size-1);
-                background-color: var(--color-brand-light);
+                background-color: var(--color-text-light);
                 z-index: 10;
                 mix-blend-mode: multiply;
                 border-radius: var(--border-radius-pill);

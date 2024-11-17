@@ -2,41 +2,50 @@
  * @name flip-content.js
  * @description
  */
-function convertHTMLSpecialChars(text) {
-    return text.replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
-document.addEventListener('DOMContentLoaded', (event) => {
+(function () {
 
-    const flipElements = document.querySelectorAll('[data-flip-content]');
+    function convertHTMLSpecialChars(text) {
+        return text.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
 
-    flipElements.forEach(element => {
-        let words = JSON.parse(element.getAttribute('data-flip-content'));
-        words = words.map(word => convertHTMLSpecialChars(word));
-        const iteration = element.getAttribute('data-flip-content-iteration') || 1;
-        const duration = parseInt(element.getAttribute('data-flip-content-duration')) || 1000;
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        let currentWordIndex = 0;
-        let currentIteration = 0;
+        const flipElements = document.querySelectorAll('[data-flip-content]');
 
-        const flipWord = () => {
+        flipElements.forEach(element => {
+            let words = JSON.parse(element.getAttribute('data-flip-content'));
+            words = words.map(word => convertHTMLSpecialChars(word));
+            const iteration = element.getAttribute('data-flip-content-iteration') || 1;
+            const duration = parseInt(element.getAttribute('data-flip-content-duration')) || 1000;
 
-            element.innerHTML = words[currentWordIndex];
-            currentWordIndex++;
+            let currentWordIndex = 0;
+            let currentIteration = 0;
 
-            if (currentWordIndex >= words.length) {
-                currentWordIndex = 0;
-                currentIteration++;
-            }
+            const flipWord = () => {
+                element.innerHTML = words[currentWordIndex];
+                currentWordIndex++;
 
-            if (currentIteration < iteration || iteration === 'loop') {
+                if (currentWordIndex >= words.length) {
+                    currentWordIndex = 0;
+                    currentIteration++;
+                }
+
+                if ((currentIteration < iteration || iteration === 'loop') && !prefersReducedMotion) {
+                    setTimeout(flipWord, duration);
+                }
+            };
+
+            if (!prefersReducedMotion) {
                 setTimeout(flipWord, duration);
+            } else {
+                // Set the first word for users who prefer reduced motion
+                element.innerHTML = words[0];
             }
-        };
-
-        setTimeout(flipWord, duration);
+        });
     });
-});
+})();

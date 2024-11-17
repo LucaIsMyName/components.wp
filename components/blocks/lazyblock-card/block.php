@@ -10,8 +10,6 @@
     --block--max-width: var(--size-<?= $attributes['max-width'] ?>);
     --block--spacing-y: var(--spacing-<?= $attributes['spacing-vertical'] ?>);
     --block--spacing-x: var(--spacing-<?= $attributes['spacing-horizontal'] ?>);
-    /* --block--color-background: var(--color-<?= $attributes['background-color'] ?>);
-    --block--color-text: var(--color-<?= $attributes['color'] ?>); */
     /* Card */
     --card--border-color:var(--color-<?= $attributes['card-border-color'] ?>);
     --card--color:var(--color-<?= $attributes['card-color'] ?>);
@@ -22,7 +20,13 @@
     ">
     <div class="[ container ]">
         <section class="[ card-item ]">
-            <?= $attributes['inner-blocks'] ?>
+            <?php if ($attributes['is-link']): ?>
+                <a href="<?= esc_url($attributes['link']) ?>" target="<?= $attributes['link-target'] ?>">
+                <?php endif; ?>
+                <?= $attributes['inner-blocks'] ?>
+                <?php if ($attributes['is-link']): ?>
+                </a>
+            <?php endif; ?>
         </section>
     </div>
 </section>
